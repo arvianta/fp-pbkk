@@ -1,0 +1,112 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    public function createUser(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users|max:50',
+            'phone_number' => 'required|string|max:13',
+            'role_id' => 'required|integer',
+            'password' => 'required|min:6',
+            'age' => 'nullable|integer', 
+            'height' => 'nullable|numeric', 
+            'weight' => 'nullable|numeric', 
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ]);
+
+        $user = new User([
+            'id' => Uuid::uuid4()->toString(),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'role_id' => $validated['role_id'],
+            'password' => bcrypt($validated['password']),
+            'age' => $validated['age'],
+            'height' => $validated['height'],
+            'weight' => $validated['weight'],
+        ]);
+
+        if ($request->hasFile('profile_picture')) {
+            $path = $request->file('profile_picture')->store('profile_pictures');
+            $user->profile_picture = $path;
+        }
+
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'User created successfully');
+    }
+
+    public function getUserList(Request $request)
+    {
+        $pagination = 5;
+        $users = User::orderBy('created_at', 'desc')->paginate($pagination);
+        
+        return view('admin.users.list', [
+            'title' => 'Users',
+            'users' => $users,
+        ]);
+    }
+
+    public function editUser(Request $request, $id)
+    {
+        $user = User::find($id);
+    
+        if (!$user) {
+            return redirect()->route('user.list')->with('error', 'User not found');
+        }
+    
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone_number' => 'required|string|max:13',
+            'role_id' => 'required|integer',
+            'age' => 'nullable|integer',
+            'height' => 'nullable|numeric',
+            'weight' => 'nullable|numeric',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->phone_number = $validated['phone_number'];
+        $user->role_id = $validated['role_id'];
+        $user->age = $validated['age'];
+        $user->height = $validated['height'];
+        $user->weight = $validated['weight'];
+    
+        if ($request->filled('password')) {
+            $user->password = bcrypt($validated['password']);
+        }
+    
+        if ($request->hasFile('profile_picture')) {
+            $path = $request->file('profile_picture')->store('profile_pictures');
+            $user->profile_picture = $path;
+        }
+    
+        $user->save();
+    
+        return redirect()->route('user.list')->with('success', 'User updated successfully');
+    }
+    
+
+    public function deleteUser(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('user.list')->with('error', 'User not found');
+        }
+
+        $user->delete();
+
+        return redirect()->route('user.list')->with('success', 'User deleted successfully');
+    }
+}
