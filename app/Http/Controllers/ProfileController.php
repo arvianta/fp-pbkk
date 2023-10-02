@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,19 +43,29 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        if ($request->user()->isAdmin()) {
+            $adminCount = User::where('role_id', '=', 2)->count();
+    
+            if ($adminCount > 1) {
+                $request->validateWithBag('userDeletion', [
+                    'password' => ['required', 'current_password'],
+                ]);
+    
+                $user = $request->user();
+    
+                Auth::logout();
+    
+                $user->delete();
+    
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+    
+                return Redirect::to('/');
+            } else {
+                return Redirect::back()->withErrors(['password' => 'You cannot delete the last admin.']);
+            }
+        } else {
+            return Redirect::back()->withErrors(['password' => 'Unauthorized to perform this action.']);
+        }
     }
 }
