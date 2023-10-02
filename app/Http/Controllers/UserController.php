@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
-
 use function Pest\Laravel\get;
 
 class UserController extends Controller
