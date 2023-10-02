@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
+use function Pest\Laravel\get;
 
 class UserController extends Controller
 {
@@ -46,13 +47,32 @@ class UserController extends Controller
 
     public function getUserList(Request $request)
     {
-        $pagination = 5;
-        $users = User::orderBy('created_at', 'desc')->paginate($pagination);
+        $pagination = 9;
         
-        return view('admin.users.list', [
-            'title' => 'Users',
-            'users' => $users,
-        ]);
+        if(isset($_GET['query'])){
+            $search_text = $_GET['query'];
+            $users = User::where('name', 'LIKE', "%$search_text%")
+                ->orWhere('email', 'LIKE', "%$search_text%")
+                ->orWhere('phone_number', 'LIKE', "%$search_text%")
+                ->orWhere('age', 'LIKE', "%$search_text%")
+                ->orWhere('height', 'LIKE', "%$search_text%")
+                ->orWhere('weight', 'LIKE', "%$search_text%")
+                ->orderBy('name', 'asc')
+                ->paginate($pagination);
+
+            return view('users', [
+                'title' => 'Users',
+                'users' => $users,
+                'query' => $search_text,
+            ]);
+        }
+        else {
+            $users = User::orderBy('name', 'asc')->paginate($pagination);
+            return view('users', [
+                'title' => 'Users',
+                'users' => $users,
+            ]);
+        }
     }
 
     public function editUser(Request $request, $id)
