@@ -90,7 +90,7 @@ class UserController extends Controller
     
         $users = $query->paginate($pagination);
     
-        return view('users', [
+        return view('admin.users', [
             'title' => 'Users',
             'users' => $users,
             'query' => $request->input('query'),
