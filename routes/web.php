@@ -21,19 +21,17 @@ Route::view('/', 'home')->name('home');
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], function () {
     Route::get('/dashboard', function () {
         return view('dashboard.admin');
-    });
-
-    Route::get('/users', [UserController::class, 'getUserList'])->name('users');
-    Route::post('/edit-user/{id}', [UserController::class, 'editUser'])->name('editUser');
-    Route::post('/delete-user', [UserController::class, 'deleteUser'])->name('deleteUser');
+    })->name('dashboard.admin');
+    Route::get('/users', [UserController::class, 'getUserList'])->name('users.list');
+    Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('users.edit');
+    Route::patch('/edit-user/{id}', [UserController::class, 'updateUser'])->name('users.update');
+    Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
 });
 
 Route::group(['middleware' => ['auth', 'isUser']], function () {
     Route::get('/dashboard', function () {
         return view('dashboard.user');
-    });
-
-
+    })->name('dashboard.user');
 });
 
 // profile
