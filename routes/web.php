@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 
 /*
@@ -18,15 +18,23 @@ require __DIR__.'/auth.php';
 
 Route::view('/', 'home')->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.admin');
+    })->name('dashboard.admin');
+    Route::get('/users', [UserController::class, 'getUserList'])->name('users.list');
+    Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('users.edit');
+    Route::patch('/edit-user/{id}', [UserController::class, 'updateUser'])->name('users.update');
+    Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
+});
 
-Route::get('/users', [UserController::class, 'getUserList'])->name('users.list');
-Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('users.edit');
-Route::patch('/edit-user/{id}', [UserController::class, 'updateUser'])->name('users.update');
-Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
+Route::group(['middleware' => ['auth', 'isUser']], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.user');
+    })->name('dashboard.user');
+});
 
+// profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

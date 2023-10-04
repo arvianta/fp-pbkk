@@ -28,7 +28,11 @@
             @if (Route::has('login'))
                 <div class="flex items-center z-10">
                     @auth
+                        @if(Auth::user()->role_id == 1)
+                        <a href="{{ url('/admin/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white  ">Dashboard</a>
+                        @elseif(Auth::user()->role_id == 2)
                         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white  ">Dashboard</a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white  ">Log in</a>
 
