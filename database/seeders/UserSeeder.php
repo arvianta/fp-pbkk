@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 'name' => 'Rayhan Arvianta',
                 'email' => 'rayhan.arvianta@gmail.com',
                 'phone_number' => '081282351996',
-                'role_id' => 2,
+                'role_id' => 1,
                 'password' => bcrypt('rayhan123'),
                 'age' => 20,
                 'height' => 180,

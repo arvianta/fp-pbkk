@@ -36,7 +36,8 @@ class UserController extends Controller
         ]);
 
         if ($request->hasFile('profile_picture')) {
-            $path = $request->file('profile_picture')->store('profile_pictures');
+            $fileName = time().$request->file('profile_picture')->getClientOriginalName();
+            $path = $request->file('profile_picture')->storeAs('images', $fileName, 'public');
             $user->profile_picture = $path;
         }
 
@@ -50,7 +51,6 @@ class UserController extends Controller
         $pagination = 9;
         $query = User::query();
     
-        // Check if a search query is provided
         if ($request->has('query')) {
             $search_text = $request->input('query');
             $query->where(function ($q) use ($search_text) {
@@ -63,7 +63,6 @@ class UserController extends Controller
             });
         }
     
-        // Check if a sorting parameter is provided
         if ($request->has('sort_by')) {
             $sort_by = $request->input('sort_by');
             if ($sort_by === 'name_asc') {
@@ -84,7 +83,6 @@ class UserController extends Controller
                 $query->orderBy('weight', 'desc');
             }
         } else {
-            // Default sorting if no sort parameter is provided
             $query->orderBy('name', 'asc');
         }
     
@@ -99,7 +97,7 @@ class UserController extends Controller
     }
     
 
-    public function editUser(Request $request, $id)
+    public function editUser($id)
     {
         $user = User::find($id);
     
@@ -129,7 +127,6 @@ class UserController extends Controller
             'age' => 'nullable|integer',
             'height' => 'nullable|numeric',
             'weight' => 'nullable|numeric',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         
         $user->name = $validated['name'];
@@ -139,24 +136,34 @@ class UserController extends Controller
         $user->age = $validated['age'];
         $user->height = $validated['height'];
         $user->weight = $validated['weight'];
-        
-        
-        if ($request->filled('password')) {
-            $user->password = bcrypt($validated['password']);
-        }
-    
-        if ($request->hasFile('profile_picture')) {
-            $path = $request->file('profile_picture')->store('profile_pictures');
-            $user->profile_picture = $path;
-        }
     
         $user->save();
     
-        return redirect()->route('users.list')->with('status', 'User updated successfully');
+        return back()->with('status', 'User updated successfully');
     }
     
+    public function photoUpload(Request $request, $id)
+    {
+        $user = User::find($id);
+    
+        if (!$user) {
+            return redirect()->route('user.list')->with('error', 'User not found');
+        }
 
-    public function deleteUser(Request $request, $id)
+        $request->validate([
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $fileName = time().$request->file('profile_picture')->getClientOriginalName();
+        $path = $request->file('profile_picture')->storeAs('images', $fileName, 'public');
+        $user->profile_picture = $path;
+
+        $user->save();
+
+        return back()->with('status', "User's profile picture updated successfully");
+    }
+
+    public function deleteUser($id)
     {
         $user = User::find($id);
 
