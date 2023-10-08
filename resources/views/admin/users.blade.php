@@ -36,7 +36,7 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <div class="flex items-center">
-                        Name
+                        Profile
                         <div class="hidden sm:flex sm:items-center">
                             <x-dropdown align="left" width="24">
                                 <x-slot name="trigger">
@@ -72,11 +72,6 @@
                                 </x-slot>
                             </x-dropdown>
                         </div>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
-                        Email
                     </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -219,12 +214,20 @@
                     <td class="px-6 py-4">
                         {{ $index + $users->firstItem() }}
                     </td>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <!-- <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $user->name }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $user->email }}
-                    </td>
+                    </td> -->
+                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                        @if($user->profile_picture)
+                            <img class="w-10 h-10 rounded-full" src="{{ asset('storage/' . $user->profile_picture) }}" alt="profile_picture">
+                        @else
+                            <img class="w-10 h-10 rounded-full" src="{{ asset('img/default.png') }}" alt="profile_picture">
+                        @endif
+                        <div class="pl-3">
+                            <div class="text-base font-semibold">{{ $user->name }}</div>
+                            <div class="font-normal text-gray-500">{{ $user->email }}</div>
+                        </div>  
+                    </th>
                     <td class="px-6 py-4">
                         {{ $user->phone_number }}
                     </td> 

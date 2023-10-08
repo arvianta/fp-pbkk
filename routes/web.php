@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     Route::get('/users', [UserController::class, 'getUserList'])->name('users.list');
     Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('users.edit');
     Route::patch('/edit-user/{id}', [UserController::class, 'updateUser'])->name('users.update');
+    Route::patch('/photo-user/{id}', [UserController::class, 'photoUpload'])->name('picture.update');
     Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
 });
 

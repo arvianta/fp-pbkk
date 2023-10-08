@@ -151,12 +151,17 @@ class UserController extends Controller
         }
 
         $request->validate([
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $fileName = time().$request->file('profile_picture')->getClientOriginalName();
-        $path = $request->file('profile_picture')->storeAs('images', $fileName, 'public');
-        $user->profile_picture = $path;
+        if ($request->hasFile('profile_picture')) {
+            $picturePath = $request->file('profile_picture')->store('public/pictures');
+            $user->profile_picture = str_replace('public/', '', $picturePath);
+        }
+
+        if ($request->type === 'delete') {
+            $user->profile_picture = null;
+        }
 
         $user->save();
 
