@@ -66,7 +66,7 @@
         $('#delete_button').click(function(e) {
             e.preventDefault(); // Prevent form submission
 
-            $('#profile_picture_edit').attr('src', '{{ asset('img/default.png') }}');
+            $('#profile_picture_edit').attr('src', "{{ asset('img/default.png') }}");
             $('#type').val('delete');
             $('#save_profile_picture_button').prop('disabled', true);
             $('#submit_button').show();
