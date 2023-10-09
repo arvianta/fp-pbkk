@@ -38,12 +38,14 @@
             </div>
         </div>
 
-        <div class="flex items-center mx-auto gap-4">
-            <x-primary-button class="flex items-center mx-auto gap-4 mt-2 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300  dark:border-red-500 dark:text-red-500 dark:bg-transparent dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" id="delete_button">{{ __('Delete Profile Picture') }}</x-primary-button>
-        </div>
+        <div class="relative">
+            <div class="text-center">
+                <button class="mt-2 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 mb-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" id="delete_button">{{ __('Delete Profile Picture') }}</button>
+            </div>
 
-        <div class="flex items-center mx-auto gap-4">
-            <x-primary-button class="flex items-center mx-auto -mt-3 gap-4 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-transparent dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" id="submit_button" style="display:none">{{ __('Save Profile Picture') }}</x-primary-button>
+            <div class="text-center">
+                <button class="mt-1 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" id="submit_button" style="display:none">{{ __('Save Profile Picture') }}</button>
+            </div>
         </div>
     </form>
 </section>
