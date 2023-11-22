@@ -48,7 +48,7 @@ class UserController extends Controller
 
     public function getUserList(Request $request)
     {
-        $pagination = 9;
+        $pagination = 6;
         $query = User::query();
     
         if ($request->has('query')) {
