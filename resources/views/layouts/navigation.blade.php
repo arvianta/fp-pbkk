@@ -19,7 +19,7 @@
                     <h1 class="text-2xl font-extrabold text-dark3 mx-2">FitHub</h1>
                 </div>
 
-                <!-- Navigation Links Home            About            Classes            Trainers            blogs            Contact -->
+                <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('homepage')" :active="request()->routeIs('homepage')">
                             {{ __('Home') }}
@@ -39,16 +39,23 @@
                     <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
                             {{ __('Contact') }}
                     </x-nav-link>
-                    @if(Auth::user()->role_id == 1)
-                        <x-nav-link :href="route('users.list')" :active="request()->routeIs('users.list')">
-                            {{ __('Users') }}
-                        </x-nav-link>
-                    @endif
                 </div>
             </div>
-
-            <!-- Settings Dropdown -->
+  
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <!-- admin nav -->
+                <div class="hidden space-x-3 sm:-my-px sm:ml-10 sm:mr-8 h-16 sm:flex justify-end">
+                    @if(Auth::user()->role_id == 1)
+                        <x-admin-nav-link :href="route('dashboard.admin')" :active="request()->routeIs('dashboard.admin')">
+                            {{ __('Dashboard') }}
+                        </x-admin-nav-link>
+                        <x-admin-nav-link :href="route('users.list')" :active="request()->routeIs('users.list')">
+                            {{ __('Users') }}
+                        </x-admin-nav-link>
+                    @endif
+                </div>
+
+                <!-- Settings Dropdown -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-gray-300 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
