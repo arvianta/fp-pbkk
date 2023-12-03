@@ -4,12 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="icon" href="https://laravel.com/img/favicon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="{{ asset('img/logo_fithub.png') }}" type="image/x-icon">
         
         <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
         <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
         <title>{{ $title ?? config('app.name') }}</title>
 
@@ -19,6 +22,25 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script>
+
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('52e1213118b62862af18', {
+            cluster: 'ap1'
+            });
+
+            var channel = pusher.subscribe('popup-channel');
+            channel.bind('user-register', function(data) {
+                // alert(JSON.stringify(data));
+                toastr.success('New user registered: ' + data.name, 'New User Registered');
+            });
+        </script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-light1">
@@ -50,7 +72,7 @@
 
             <!-- Alert -->
             @if(Session::get('status') != null)
-            <div id="alert-1" class="flex items-center justify-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 md:px-6 mx-auto max-w-md" role="alert" style="position: fixed; top: 20px; right: 0; left: 0;">
+            <div id="alert-1" class="z-50 flex items-center justify-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 md:px-6 mx-auto max-w-md" role="alert" style="position: fixed; top: 20px; right: 0; left: 0;">
                 <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                 </svg>
@@ -67,7 +89,7 @@
             </div>
             @endisset
             @if($errors->any())
-            <div id="alert-1" class="flex items-center justify-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 md:px-6 mx-auto max-w-md" role="alert" style="position: fixed; top: 20px; right: 0; left: 0;">
+            <div id="alert-1" class="z-50 flex items-center justify-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 md:px-6 mx-auto max-w-md" role="alert" style="position: fixed; top: 20px; right: 0; left: 0;">
                 <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 a9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                 </svg>
@@ -94,7 +116,11 @@
             </main>
 
             <!-- Footer -->
-            @include('layouts.footer')
+            @if(request()->is('dashboard/*') || request()->is('admin/*') || request()->is('profile'))
+                <!-- None -->
+            @else
+                @include('layouts.footer')
+            @endif
 
         </div>
     </body>

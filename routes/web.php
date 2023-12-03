@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Events\UserRegistration;
 require __DIR__.'/auth.php';
 
 /*
@@ -16,15 +17,12 @@ require __DIR__.'/auth.php';
 |
 */
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('dump.homepage');
 });
 
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], function () {
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard.admin');
-    // })->name('dashboard.admin');
     Route::get('/dashboard', function () {
-        return view('dump.homepage');
+        return view('dashboard.admin');
     })->name('dashboard.admin');
 
     Route::get('/users', [UserController::class, 'getUserList'])->name('users.list');
@@ -32,15 +30,26 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     Route::patch('/edit-user/{id}', [UserController::class, 'updateUser'])->name('users.update');
     Route::patch('/photo-user/{id}', [UserController::class, 'photoUpload'])->name('picture.update');
     Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
+
+    //userlist, transaction, trainerlist, memberlist, chat
+    Route::get('/userlist',  [UserController::class, 'getUserList'])->name('admin.userlist');
+    Route::view('/transaction', 'dashboard.admin.transaction')->name('admin.transaction');
+    Route::view('/trainerlist', 'dashboard.admin.trainerlist')->name('admin.trainerlist');
+    Route::view('/memberlist', 'dashboard.admin.memberlist')->name('admin.memberlist');
+    Route::view('/chat', 'dashboard.admin.chat')->name('admin.chat');
 });
 
 Route::group(['middleware' => ['auth', 'isUser']], function () {
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard.user');
-    // })->name('dashboard.user');
     Route::get('/dashboard', function () {
-        return view('dump.homepage');
+        return view('dashboard.user');  
     })->name('dashboard.user');
+
+    //bmi, chat, course, payment, transaction
+    Route::view('/bmi', 'dashboard.user.bmi')->name('user.bmi');
+    Route::view('/chat', 'dashboard.user.chat')->name('user.chat');
+    Route::view('/course', 'dashboard.user.course')->name('user.course');
+    Route::view('/payment', 'dashboard.user.payment')->name('user.payment');
+    Route::view('/transaction', 'dashboard.user.transaction')->name('user.transaction');
 });
 
 // profile
@@ -63,3 +72,11 @@ Route::view('/blog', 'dump.blog')->name('blog');
 Route::view('/blogs', 'dump.blogs')->name('blogs');
 Route::view('/bmi', 'dump.bmi')->name('bmi');
 
+Route::get('/userRegistration', function () {
+    return view('userRegistration');
+});
+
+Route::post('/userRegistration', function () {
+    $name = request()->name;
+    event(new UserRegistration($name));
+});

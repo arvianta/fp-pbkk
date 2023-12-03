@@ -44,53 +44,62 @@
   
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- admin nav -->
-                <div class="hidden space-x-3 sm:-my-px sm:ml-10 sm:mr-8 h-16 sm:flex justify-end">
-                    @if(Auth::user()->role_id == 1)
-                        <x-admin-nav-link :href="route('dashboard.admin')" :active="request()->routeIs('dashboard.admin')">
-                            {{ __('Dashboard') }}
-                        </x-admin-nav-link>
-                        <x-admin-nav-link :href="route('users.list')" :active="request()->routeIs('users.list')">
-                            {{ __('Users') }}
-                        </x-admin-nav-link>
-                    @endif
-                </div>
+                @if (Route::has('login'))
+                    <div class="hidden space-x-3 sm:-my-px sm:ml-10 sm:mr-8 h-16 sm:flex justify-end">
+                        @auth
+                        @if(Auth::user()->role_id == 1)
+                            <x-admin-nav-link :href="route('dashboard.admin')" :active="request()->routeIs('admin.*') || request()->routeIs('dashboard.admin')">
+                                {{ __('Dashboard') }}
+                            </x-admin-nav-link>
+                        @endif
+                        @if(Auth::user()->role_id == 2)
+                            <x-admin-nav-link :href="route('dashboard.user')" :active="request()->routeIs('user.*') || request()->routeIs('dashboard.user')">
+                                {{ __('Dashboard') }}
+                            </x-admin-nav-link>
+                        @endif
+                    </div>
 
-                <!-- Settings Dropdown -->
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-gray-300 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            @if(Auth::user()->profile_picture)
-                                <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="rounded-full w-7 h-7 mr-3">
-                            @else
-                                <img src="{{ asset('img/default.png') }}" alt="Profile Picture" class="rounded-full w-7 h-7 mr-3">
+                    <!-- Settings Dropdown -->
+                    <div class="flex items-center z-10">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-gray-300 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    @if(Auth::user()->profile_picture)
+                                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="rounded-full w-7 h-7 mr-3">
+                                    @else
+                                        <img src="{{ asset('img/default.png') }}" alt="Profile Picture" class="rounded-full w-7 h-7 mr-3">
+                                    @endif
+                                    <div>{{ Auth::user()->name }}</div>
+                                    <div class="ml-1">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('profile.edit')">
+                                    {{ __('Profile') }}
+                                </x-dropdown-link>
+                                <!-- Authentication -->
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form>
+                            </x-slot>
+                        </x-dropdown>
+                        @else
+                            <a href="{{ route('login') }}" class="font-semibold text-gray-600 mt-5 hover:text-gray-900">Log in</a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="ml-8 font-semibold mt-5 text-gray-600 hover:text-gray-900">Register</a>
                             @endif
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
+                        @endauth
+                    </div>
+                @endif
             </div>
 
             <!-- Hamburger -->
@@ -106,6 +115,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
+    @auth
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @if(Auth::user()->role_id == 1)
@@ -144,6 +154,7 @@
             </div>
         </div>
     </div>
+    @endauth
 </nav>
 
 

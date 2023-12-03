@@ -29,5 +29,20 @@ class UserSeeder extends Seeder
                 'profile_picture' => 'awdsadsawwds',
             ],
         ]);
+
+        User::insert([
+            [
+                'id' => Uuid::uuid4()->toString(),
+                'name' => 'Muh Daffa',
+                'email' => 'muhdaffa2410@gmail.com',
+                'phone_number' => '085156256502',
+                'role_id' => 1,
+                'password' => bcrypt('admin1234'),
+                'age' => 21,
+                'height' => 171,
+                'weight' => 57,
+                'profile_picture' => 'dfsdf',
+            ],
+        ]);
     }
 }

@@ -89,7 +89,7 @@
 
     <div class="w-[2038px] h-[127px] relative">
         <div class="w-[2038px] h-[127px] left-0 top-0 absolute bg-dark3"></div>
-        <div class="left-0 top-[31px] absolute"><span class="text-white text-6xl font-extrabold leading-[66px] tracking-[20.70px]">FOCUS ON YOUR  </span><span class="text-lime-300 text-6xl font-extrabold leading-[66px] tracking-[20.70px]">FITNESS</span><span class="text-white text-6xl font-extrabold leading-[66px] tracking-[20.70px]"> NOT  YOUR LOSS</span></div>
+        <div class="left-0 top-[31px] absolute z-0"><span class="text-white text-6xl font-extrabold leading-[66px] tracking-[20.70px]">FOCUS ON YOUR  </span><span class="text-lime-300 text-6xl font-extrabold leading-[66px] tracking-[20.70px]">FITNESS</span><span class="text-white text-6xl font-extrabold leading-[66px] tracking-[20.70px]"> NOT  YOUR LOSS</span></div>
     </div>
 
     <!-- About section -->
@@ -114,14 +114,14 @@
                         <div class="w-[311px] text-neutral-500 text-xl font-medium  capitalize leading-[29px]">It is a long established fact that a reader will be distracted </div>
                     </div>
                     <div class="w-[246px] h-[191px] relative">
-                        <img class="w-[246px] h-[191px] left-0 top-0 absolute rounded-2xl" src="https://source.unsplash.com/random/?weightlifting/246x191/1" />
+                        <img class="w-[246px] h-[191px] left-0 top-0 z-0 absolute rounded-2xl" src="https://source.unsplash.com/random/?weightlifting/246x191/1" />
                     </div>
                     </div>
                 </div>
                 <div class="px-[30px] pt-[30px] pb-[31px] bg-gray-300 flex-col justify-start items-start rounded-xl gap-2.5 flex">
                     <div class="w-[611px] justify-start items-center gap-[27px] inline-flex">
                     <div class="w-[246px] h-[191px] relative">
-                        <img class="w-[246px] h-[191px] left-0 top-0 absolute rounded-2xl" src="https://source.unsplash.com/random/?weightlifting/246x191/2" />
+                        <img class="w-[246px] h-[191px] left-0 top-0 z-0 absolute rounded-2xl" src="https://source.unsplash.com/random/?weightlifting/246x191/2" />
                     </div>
                     <div class="w-[311px] flex-col justify-start items-start gap-[13px] inline-flex">
                         <div class="text-dark3 text-3xl font-bold  leading-[33px]">Inspire</div>

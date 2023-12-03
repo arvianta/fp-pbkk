@@ -48,7 +48,7 @@ class UserController extends Controller
 
     public function getUserList(Request $request)
     {
-        $pagination = 6;
+        $pagination = 8;
         $query = User::query();
     
         if ($request->has('query')) {
@@ -88,8 +88,9 @@ class UserController extends Controller
     
         $users = $query->paginate($pagination);
     
-        return view('admin.users', [
-            'title' => 'Users',
+        //return route admin.userlist
+        return view('dashboard.admin.userlist', [
+            'title' => 'User List',
             'users' => $users,
             'query' => $request->input('query'),
             'sort_by' => $request->input('sort_by'),
@@ -173,10 +174,10 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (!$user) {
-            return redirect()->route('users.list')->with('error', 'User not found');
+            return redirect()->route('admin.userlist')->with('error', 'User not found');
         }
         $user->delete();
 
-        return redirect()->route('users.list')->with('status', 'User deleted successfully');
+        return redirect()->route('admin.userlist')->with('status', 'User deleted successfully');
     }
 }

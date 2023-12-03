@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistration;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -46,6 +47,9 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        $name = $request->name;
+        event(new UserRegistration($name));
 
         Auth::login($user);
 
