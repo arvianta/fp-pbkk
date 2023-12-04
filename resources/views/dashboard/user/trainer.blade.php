@@ -8,7 +8,7 @@
             <div class="p-4 my-6 w-10/12 float-right">
                 <div class="sm:px-6 mx-4"> 
                     <div class="px-4">  
-                        <div class="my-5 flex items-center justify-between">
+                        <div class="mb-5 flex items-center justify-between">
                             <h2 class="text-lg font-semibold text-gray-900">Active Trainers</h2>
                             </div>
                             <div class="mb-6 sm:w-1/3 rounded-lg bg-white p-6 shadow-md">
