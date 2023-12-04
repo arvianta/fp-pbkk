@@ -88,13 +88,7 @@ class UserController extends Controller
     
         $users = $query->paginate($pagination);
     
-        //return route admin.userlist
-        return view('dashboard.admin.userlist', [
-            'title' => 'User List',
-            'users' => $users,
-            'query' => $request->input('query'),
-            'sort_by' => $request->input('sort_by'),
-        ]);
+        return $users;
     }
     
 
