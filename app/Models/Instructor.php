@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Instructor extends Model
 {
     use HasFactory;
 
-    protected $table = 'roles';
+    protected $table = 'instructors';
     protected $primaryKey = 'id';
     protected $keyType = 'integer';
     public $incrementing = true;
@@ -18,8 +18,8 @@ class Role extends Model
         'name',
     ];
 
-    public function users()
+    public function expertises()
     {
-        return $this->hasMany(User::class, 'role_id');
+        return $this->belongsToMany(Expertise::class, 'instructor_expertise', 'instructor_id', 'expertise_id');
     }
 }

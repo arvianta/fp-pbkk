@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('workout_class_id')->references('id')->on('workout_class')->onDelete('cascade');
+            $table->foreign('workout_class_id')->references('id')->on('workout_classes')->onDelete('cascade');
         });
     }
 

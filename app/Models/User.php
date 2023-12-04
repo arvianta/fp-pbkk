@@ -39,4 +39,19 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
+
+    public function healthInformation()
+    {
+        return $this->hasOne(HealthInformation::class, 'user_id');
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscriptions::class, 'user_id');
+    }
+
+    public function attendedWorkoutClasses()
+    {
+        return $this->belongsToMany(WorkoutClass::class, 'user_workout_class', 'user_id', 'workout_class_id');
+    }
 }

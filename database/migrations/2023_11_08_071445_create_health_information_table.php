@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('health_information', function (Blueprint $table) {
+        Schema::create('health_informations', function (Blueprint $table) {
             $table->id();
             $table->decimal('bmi', 6, 2)->nullable();
             $table->decimal('body_fat_percentage', 6, 2)->nullable();

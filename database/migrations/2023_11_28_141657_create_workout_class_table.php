@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('workout_class', function (Blueprint $table) {
+        Schema::create('workout_classes', function (Blueprint $table) {
             $table->id();
             $table->string('name', 20);
             $table->text('description');
             $table->string('day', 20);
+            $table->string('time', 20);
+            $table->string('duration', 20);
+            $table->integer('capacity');
             $table->unsignedBigInteger('instructor_id');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

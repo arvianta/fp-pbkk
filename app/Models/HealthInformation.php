@@ -5,21 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class HealthInformation extends Model
 {
     use HasFactory;
 
-    protected $table = 'roles';
+    protected $table = 'health_informations';
     protected $primaryKey = 'id';
     protected $keyType = 'integer';
     public $incrementing = true;
 
     protected $fillable = [
-        'name',
+        'bmi',
+        'body_fat_percentage',
+        'user_id',
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany(User::class, 'role_id');
+        return $this->belongsTo(User::class);
     }
 }

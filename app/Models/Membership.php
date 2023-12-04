@@ -5,21 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Membership extends Model
 {
     use HasFactory;
 
-    protected $table = 'roles';
+    protected $table = 'memberships';
     protected $primaryKey = 'id';
     protected $keyType = 'integer';
     public $incrementing = true;
 
     protected $fillable = [
-        'name',
+        'duration',
+        'cost',
     ];
 
-    public function users()
+    public function subscriptions()
     {
-        return $this->hasMany(User::class, 'role_id');
+        return $this->hasMany(Subscriptions::class, 'membership_id');
     }
 }
