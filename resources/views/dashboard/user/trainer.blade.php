@@ -4,9 +4,9 @@
     </x-slot>
     <div>
         @include('dashboard.user.sidebar')
-        <div class="p-4 sm:ml-64">
-            <div class="">
-                <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
+        <div class="">
+            <div class="p-4 my-6 w-10/12 float-right">
+                <div class="sm:px-6 mx-4"> 
                     <div class="px-4">  
                         <div class="my-5 flex items-center justify-between">
                             <h2 class="text-lg font-semibold text-gray-900">Active Trainers</h2>

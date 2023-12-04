@@ -4,9 +4,10 @@
     </x-slot>
     <div>
         @include('dashboard.admin.sidebar')
-        <div class="p-4 sm:ml-64 my-6">
-            <div class="">
-                <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 ml-5">
+        <div class="">
+            <div class="p-4 my-6 w-10/12 float-right">
+                <div class="">
+                    <div class="sm:px-6 mx-4"> 
                     <div class="">
                         <form action="{{ route('admin.userlist') }}" method="get" class="w-full inline-block">   
                             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>

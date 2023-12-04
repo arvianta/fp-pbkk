@@ -4,9 +4,9 @@
     </x-slot>
     <div>
         @include('dashboard.user.sidebar')
-        <div class="p-4 sm:ml-64 my-6">
-            <div class="">
-                <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 ml-5">
+        <div class="">
+            <div class="p-4 my-6 w-10/12 float-right">
+                <div class="sm:px-6 mx-4"> 
                     <div class="bg-white rounded-2xl overflow-hidden shadow-md w-1/3">
                         <img src="https://source.unsplash.com/random/900x100/?product/1" alt="" class="h-24" />
                         <div class="flex flex-col items-center justify-center gap-6 p-6 md:p-10">

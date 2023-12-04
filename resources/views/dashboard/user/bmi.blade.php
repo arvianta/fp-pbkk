@@ -4,9 +4,9 @@
     </x-slot>
     <div>
         @include('dashboard.user.sidebar')
-        <div class="p-4 sm:ml-64 my-6">
-            <div class="">
-                <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 ml-5">
+        <div class="">
+            <div class="p-4 my-6 w-10/12 float-right">
+                <div class="sm:px-6 mx-4"> 
                     <div class="grid gap-4 xl:grid-cols-2 2xl:grid-cols-3">
                         <!-- Graph -->
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-2">

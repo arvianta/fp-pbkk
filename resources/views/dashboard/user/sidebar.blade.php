@@ -1,4 +1,4 @@
-<aside id="cta-button-sidebar" class="fixed top-0 left-0 z-0 w-64 pt-10 mt-8 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+<aside id="cta-button-sidebar" class="fixed top-0 left-0 z-0 w-2/12 pt-10 mt-8 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 border-r border-gray-300">
         <ul class="space-y-3 mt-2 mx-1 font-medium">
             <li>

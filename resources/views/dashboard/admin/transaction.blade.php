@@ -4,9 +4,10 @@
     </x-slot>
     <div>
         @include('dashboard.admin.sidebar')
-        <div class="p-4 sm:ml-64 my-6">
-            <div class="">
-                <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 ml-5">
+        <div class="">
+            <div class="p-4 my-6 w-10/12 float-right">
+                <div class="">
+                    <div class="sm:px-6 mx-4"> 
                     <!-- Card header -->
                     <div class="items-center justify-between lg:flex">
                         <div class="mb-4 lg:mb-0">
