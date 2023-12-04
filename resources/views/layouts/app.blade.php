@@ -46,13 +46,12 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-light1">
             <!-- Navigation -->
-            @auth
-                @if(auth()->check())
-                    @include('layouts.navigation2')
-                @else
-                    @include('layouts.navigation')
-                @endif
-            @endauth
+            @if(request()->is('admin/*') || request()->is('dashboard/*') || request()->is('profile') || request()->is('user/*')) 
+                @include('layouts.navigation2')
+            @else
+                @include('layouts.navigation')
+            @endif
+
 
             <!-- Banner Section -->
             @if(request()->is('homepage') || request()->is('admin/*') || request()->is('dashboard/*') || request()->is('profile') || request()->is('/') || request()->is('user/*')) 
