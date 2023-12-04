@@ -10,6 +10,7 @@
         <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -21,7 +22,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/charts.js'])
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
@@ -45,10 +46,16 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-light1">
             <!-- Navigation -->
-            @include('layouts.navigation')
+            @auth
+                @if(auth()->check())
+                    @include('layouts.navigation2')
+                @else
+                    @include('layouts.navigation')
+                @endif
+            @endauth
 
             <!-- Banner Section -->
-            @if(request()->is('homepage') || request()->is('admin/*') || request()->is('dashboard') || request()->is('profile') || request()->is('/'))
+            @if(request()->is('homepage') || request()->is('admin/*') || request()->is('dashboard/*') || request()->is('profile') || request()->is('/') || request()->is('user/*')) 
                 <!-- None -->
             @else
                 @php
@@ -116,7 +123,7 @@
             </main>
 
             <!-- Footer -->
-            @if(request()->is('dashboard/*') || request()->is('admin/*') || request()->is('profile'))
+            @if(request()->is('dashboard/*') || request()->is('admin/*') || request()->is('profile') || request()->is('user/*'))
                 <!-- None -->
             @else
                 @include('layouts.footer')

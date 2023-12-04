@@ -4,12 +4,12 @@
     </x-slot>
     <div>
         @include('dashboard.user.sidebar')
-        <div class="p-4 sm:ml-64">
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="p-4 sm:ml-64 my-6">
+            <div class="">
+                <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 ml-5">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
-                            {{ __("Welcome User") }}
+                            {{ __("Course") }}
                         </div>
                     </div>
                 </div>

@@ -34,12 +34,14 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     //userlist, transaction, trainerlist, memberlist, chat
     Route::get('/userlist',  [UserController::class, 'getUserList'])->name('admin.userlist');
     Route::view('/transaction', 'dashboard.admin.transaction')->name('admin.transaction');
-    Route::view('/trainerlist', 'dashboard.admin.trainerlist')->name('admin.trainerlist');
-    Route::view('/memberlist', 'dashboard.admin.memberlist')->name('admin.memberlist');
-    Route::view('/chat', 'dashboard.admin.chat')->name('admin.chat');
+    Route::view('/trainers', 'dashboard.admin.trainers')->name('admin.trainers');
+    Route::view('/membership', 'dashboard.admin.membership')->name('admin.membership');
+    Route::view('/classes', 'dashboard.admin.classes')->name('admin.classes');
+    Route::view('/instructors', 'dashboard.admin.instructors')->name('admin.instructors');
+    Route::view('/broadcast', 'dashboard.admin.broadcast')->name('admin.broadcast');
 });
 
-Route::group(['middleware' => ['auth', 'isUser']], function () {
+Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function () {
     Route::get('/dashboard', function () {
         return view('dashboard.user');  
     })->name('dashboard.user');
@@ -50,6 +52,10 @@ Route::group(['middleware' => ['auth', 'isUser']], function () {
     Route::view('/course', 'dashboard.user.course')->name('user.course');
     Route::view('/payment', 'dashboard.user.payment')->name('user.payment');
     Route::view('/transaction', 'dashboard.user.transaction')->name('user.transaction');
+    Route::view('/membership', 'dashboard.user.membership')->name('user.membership');
+    Route::view('/class', 'dashboard.user.class')->name('user.class');
+    Route::view('/trainer', 'dashboard.user.trainer')->name('user.trainer');
+    Route::view('/home', 'dashboard.user.home')->name('user.home'); 
 });
 
 // profile
