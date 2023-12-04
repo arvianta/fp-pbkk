@@ -8,7 +8,7 @@
             <div class="px-4">
                 <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
                     <!-- if active membership -->
-                    <!-- <div>
+                    <div>
                         <div class="bg-white overflow-hidden shadow-md sm:rounded-lg mr-12 pb-6 mb-6">
                             <div class="flex items-center">
                                 <div class="p-6 text-gray-900 font-bold text-xl">{{ __("Basic Plan") }}</div>
@@ -37,7 +37,7 @@
                                 Upgrade Plan
                             </button>
                         </div>
-                    </div> -->
+                    </div>
 
                     <!-- if no active membership -->
                     <div class="flex items-center mb-6 justify-between">
