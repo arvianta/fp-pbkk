@@ -32,17 +32,7 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
 
     //cth route get dari controller
-    Route::get('/userlist', function () {
-        $userController = new UserController();
-        $users = $userController->getUserList(request());
-    
-        return view('dashboard.admin.userlist', [
-            'title' => 'User List',
-            'users' => $users,
-            'query' => request()->input('query'),
-            'sort_by' => request()->input('sort_by'),
-        ]);
-    })->name('admin.userlist');
+    Route::get('/userlist', [UserController::class, 'getUserList'])->name('admin.userlist');
 
     Route::view('/transaction', 'dashboard.admin.transaction')->name('admin.transaction');
     Route::view('/trainers', 'dashboard.admin.trainers')->name('admin.trainers');
