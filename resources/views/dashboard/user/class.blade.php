@@ -65,7 +65,7 @@
                                         <!-- Modal content -->
                                         <div class="flex justify-center">
                                             <div class="bg-white rounded-2xl overflow-hidden shadow-md w-1/3">
-                                                <img src="https://source.unsplash.com/random/900x700/?product/{{ $i }}" alt="" class="h-24 w-full"/>
+                                                <img src="{{ asset('img/banner.png') }}" alt="" class="h-24 w-full"/>
                                                 <div class="flex flex-col items-center justify-center gap-6 p-6 md:p-10">
                                                 <h1 class="text-md md:text-xl font-extrabold">Order Summary</h1>
                                                 <p class="text-center text-gray-400">

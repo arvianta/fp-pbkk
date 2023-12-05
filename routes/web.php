@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Events\UserRegistration;
 use Illuminate\Support\Facades\DB;
@@ -108,6 +109,8 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
 
         return view('dashboard.admin.trainers', ['trainers' => $trainers]);
     })->name('admin.trainers');
+
+    Route::get('/api/payment-data', [PaymentController::class, 'getPaymentData'])->name('api.payment-data'); 
 });
 
 Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function () {
@@ -125,6 +128,37 @@ Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function 
     Route::view('/class', 'dashboard.user.class')->name('user.class');
     Route::view('/trainer', 'dashboard.user.trainer')->name('user.trainer');
     Route::view('/home', 'dashboard.user.home')->name('user.home'); 
+
+    Route::get('/membership', function () {
+        //check table subscriptions jika ada user_id = auth()->user()->id dan membership_id != null maka show membership data, else show membership list
+        $memberships = DB::table('subscriptions')
+            ->join('memberships', 'subscriptions.membership_id', '=', 'memberships.id')
+            ->where('subscriptions.user_id', '=', auth()->user()->id) 
+            ->whereNotNull('subscriptions.membership_id')
+            ->select('memberships.*')
+            ->get();
+        if ($memberships->isEmpty()) {
+            $memberships = DB::table('memberships')
+                ->paginate(10);
+        }
+ 
+        return view('dashboard.user.membership', ['memberships' => $memberships]);
+    })->name('user.membership');
+
+    Route::get('/classes', function(){
+        $activeClasses = DB::table('user_workout_classes')
+            ->join('workout_classes', 'user_workout_classes.workout_class_id', '=', 'workout_classes.id')
+            ->where('user_workout_classes.user_id', '=', auth()->user()->id)
+            ->select('workout_classes.*')
+            ->get();
+        
+        $classes = DB::table('workout_classes')
+            ->paginate(10);
+
+        return view('dashboard.user.class', ['classes' => $classes, 'activeClasses' => $activeClasses]);
+    })->name('user.classes');
+
+
 });
 
 // profile

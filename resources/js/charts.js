@@ -3,22 +3,14 @@ import ApexCharts from 'apexcharts';
 const getMainChartOptions = () => {
 	let mainChartColors = {}
 
-	if (document.documentElement.classList.contains('dark')) {
-		mainChartColors = {
-			borderColor: '#374151',
-			labelColor: '#9CA3AF',
-			opacityFrom: 0,
-			opacityTo: 0.15,
-		};
-	} else {
-		mainChartColors = {
-			borderColor: '#F3F4F6',
-			labelColor: '#6B7280',
-			opacityFrom: 0.45,
-			opacityTo: 0,
-		}
+	
+	mainChartColors = {
+		borderColor: '#F3F4F6',
+		labelColor: '#6B7280',
+		opacityFrom: 0.45,
+		opacityTo: 0,
 	}
-
+	
 	return {
 		chart: {
 			height: 420,
