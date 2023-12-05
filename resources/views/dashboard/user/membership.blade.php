@@ -23,21 +23,6 @@
                                 </ul>
                             </div>
                         </div>
-
-                        <div class="pb-6 justify-end flex mr-12 gap-4 ">
-                            <button type="button" class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center   ">
-                                <svg class="w-3.5 h-3.5 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                                    <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z"/>
-                                </svg>
-                                Cancel Plan
-                            </button>
-                            <button type="button" class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center   ">
-                                <svg class="w-3.5 h-3.5 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 10H1m0 0 3-3m-3 3 3 3m1-9h10m0 0-3 3m3-3-3-3"/>
-                                </svg>
-                                Upgrade Plan
-                            </button>
-                        </div>
                     </div>
                     @else
                     
@@ -103,40 +88,57 @@
                         </div>
                         <!-- Main modal -->
                         <div id="static-modal-{{ $membership->id }}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden fixed z-50 justify-center bg-gray-800/60 items-center md:inset-0 max-h-full">
-                            <div class="relative p-4 w-full max-h-full mt-28">
-                                <!-- Modal content -->
-                                <div class="flex justify-center">
-                                    <div class="bg-white rounded-2xl overflow-hidden shadow-md w-1/3">
-                                        <img src="{{ asset('img/banner.png') }}" alt="" class="h-24 w-full"/>
-                                        <div class="flex flex-col items-center justify-center gap-6 p-6 md:p-10">
-                                        <h1 class="text-md md:text-xl font-extrabold">Order Summary</h1>
-                                        <p class="text-center text-gray-400">
-                                            You can now listen to millions of songs, audiobooks, and podcasts on
-                                            any device anywhere you like!
-                                        </p>
-                                        <div class="flex items-center justify-between bg-gray-200 p-4 w-full rounded-xl">
-                                            <div class="flex items-center gap-5">
-                                            <img src="https://source.unsplash.com/random/50x50/?product/2" alt="" class="rounded-full"/>
-                                            <div class="space-y-1 text-sm">
-                                                <p class="font-bold">Annual Plan</p>
-                                                <p class="text-gray-400">$59.99/year</p>
+                                <div class="relative p-4 w-full max-h-full mt-16">
+                                    <!-- Modal content -->
+                                    <div class="flex justify-center">
+                                        <div class="bg-white rounded-2xl overflow-hidden shadow-md w-1/3">
+                                            <img src="{{ asset('img/banner.png') }}" alt="" class="h-24 w-full"/>
+                                            <div class="flex flex-col items-center justify-center gap-6 p-6 md:p-10">
+                                            <h1 class="text-md md:text-xl font-extrabold">Order Summary</h1>
+                                            <p class="text-center text-gray-400">
+                                                You will be charged Rp {{ $membership->cost }} for {{ $membership->duration }} months
+                                            </p>
+                                            <div class="flex items-center justify-between bg-gray-200 p-4 w-full rounded-xl">
+                                                <div class="flex items-center gap-5">
+                                                <img src="{{asset('img/logo_fithub.png')}}" alt="" class="rounded-full w-[50px] h-[50px]"/>
+                                                <div class="space-y-1 text-sm">
+                                                    <p class="font-bold">{{ $membership->duration }} months</p>
+                                                    <p class="text-gray-400">Rp {{ $membership->cost }}</p>
+                                                </div>
+                                                </div>
                                             </div>
+                                                <form  method="post" class="flex flex-col gap-4 w-full">
+                                                    @csrf
+                                                    <div class="flex flex-col gap-2">
+                                                        <label for="payment_method" class="text-sm font-bold text-gray-500">Payment Method</label>
+                                                        <select name="payment_method" id="payment_method" class="border border-gray-300 rounded-md p-2">
+                                                            <option value="credit_card">Credit Card</option>
+                                                            <option value="bank_transfer">Bank Transfer</option>
+                                                            <option value="paypal">Paypal</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="flex flex-col gap-2">
+                                                        <label for="total_price" class="text-sm font-bold text-gray-500">Total Price</label>
+                                                        <input type="text" name="total_price" id="total_price" value="{{ $membership->cost }}" class="border border-gray-300 rounded-md p-2" readonly disabled>
+                                                    </div>
+                                                    <div class="flex flex-col gap-2">
+                                                        <label for="proof_payment" class="text-sm font-bold text-gray-500">Proof Payment</label>
+                                                        <input type="file" name="proof_payment" id="proof_payment" class="border border-gray-300 rounded-md p-2">
+                                                    </div>
+                                                    <div class="flex flex-col gap-2">
+                                                        <button type="submit" class="bg-primary/80 hover:bg-primary text-dark2 hover:text-dark3 py-3 w-full font-bold rounded-xl shadow-md transition-all duration-300">
+                                                            Proceed to Payment
+                                                        </button>
+                                                        <button data-modal-hide="static-modal-{{ $membership->id }}" type="button" class="text-gray-500 hover:text-gray-800 font-bold transition-all duration-300">
+                                                            Cancel Order
+                                                        </button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <a href="#" class="text-sm font-bold text-dark3 hover:text-dark3 hover:no-underline underline transition-all duration-300">
-                                                Change
-                                            </a>
-                                        </div>
-                                        <button data-modal-hide="static-modal-{{ $membership->id }}" type="button" class="bg-primary/80 hover:bg-primary text-dark2 hover:text-dark3 py-3 w-full font-bold rounded-xl shadow-md transition-all duration-300">
-                                            Proceed to Payment
-                                        </button>
-                                        <button data-modal-hide="static-modal-{{ $membership->id }}" type="button" class="text-gray-500 hover:text-gray-800 font-bold transition-all duration-300">
-                                            Cancel Order
-                                        </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     <div>
                     @endif

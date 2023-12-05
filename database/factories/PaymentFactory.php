@@ -16,7 +16,7 @@ class PaymentFactory extends Factory
     {
         return [
             'id' => $this->faker->uuid,
-            'method' => $this->faker->randomElement(['Credit Card', 'PayPal', 'Cash']),
+            'method' => $this->faker->randomElement(['Credit Card', 'PayPal', 'Bank Transfer']),
             'total' => $this->faker->randomFloat(2, 1, 10000),
             'date' => $this->faker->date(),
             'status' => $this->faker->randomElement(['Pending', 'Completed', 'Failed']),

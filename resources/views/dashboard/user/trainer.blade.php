@@ -80,7 +80,7 @@
                             </button>
                             <!-- Main modal -->
                             <div id="static-modal-{{ $trainer->id }}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden fixed z-50 justify-center bg-gray-800/60 items-center md:inset-0 max-h-full">
-                                <div class="relative p-4 w-full max-h-full mt-28">
+                                <div class="relative p-4 w-full max-h-full mt-16">
                                     <!-- Modal content -->
                                     <div class="flex justify-center">
                                         <div class="bg-white rounded-2xl overflow-hidden shadow-md w-1/3">
@@ -88,27 +88,44 @@
                                             <div class="flex flex-col items-center justify-center gap-6 p-6 md:p-10">
                                             <h1 class="text-md md:text-xl font-extrabold">Order Summary</h1>
                                             <p class="text-center text-gray-400">
-                                                You can now listen to millions of songs, audiobooks, and podcasts on
-                                                any device anywhere you like!
+                                                You will be charged Rp {{ $trainer->session_cost }} for 1 session with {{ $trainer->name }}.
                                             </p>
                                             <div class="flex items-center justify-between bg-gray-200 p-4 w-full rounded-xl">
                                                 <div class="flex items-center gap-5">
-                                                <img src="https://source.unsplash.com/random/50x50/?gym/2" alt="" class="rounded-full"/>
+                                                <img src="https://source.unsplash.com/random/900x700/?face/{{ $trainer->id }}" alt="" class="rounded-full w-[50px] h-[50px]"/>
                                                 <div class="space-y-1 text-sm">
-                                                    <p class="font-bold">Annual Plan</p>
-                                                    <p class="text-gray-400">$59.99/year</p>
+                                                    <p class="font-bold">{{ $trainer->name }}</p>
+                                                    <p class="text-gray-400">Rp {{ $trainer->session_cost }}</p>
                                                 </div>
                                                 </div>
-                                                <a href="#" class="text-sm font-bold text-dark3 hover:text-dark3 hover:no-underline underline transition-all duration-300">
-                                                    Change
-                                                </a>
                                             </div>
-                                            <button data-modal-hide="static-modal-{{ $trainer->id }}" type="button" class="bg-primary/80 hover:bg-primary text-dark2 hover:text-dark3 py-3 w-full font-bold rounded-xl shadow-md transition-all duration-300">
-                                                Proceed to Payment
-                                            </button>
-                                            <button data-modal-hide="static-modal-{{ $trainer->id }}" type="button" class="text-gray-500 hover:text-gray-800 font-bold transition-all duration-300">
-                                                Cancel Order
-                                            </button>
+                                                <form  method="post" class="flex flex-col gap-4 w-full">
+                                                    @csrf
+                                                    <div class="flex flex-col gap-2">
+                                                        <label for="payment_method" class="text-sm font-bold text-gray-500">Payment Method</label>
+                                                        <select name="payment_method" id="payment_method" class="border border-gray-300 rounded-md p-2">
+                                                            <option value="credit_card">Credit Card</option>
+                                                            <option value="bank_transfer">Bank Transfer</option>
+                                                            <option value="paypal">Paypal</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="flex flex-col gap-2">
+                                                        <label for="total_price" class="text-sm font-bold text-gray-500">Total Price</label>
+                                                        <input type="text" name="total_price" id="total_price" value="{{ $trainer->session_cost }}" class="border border-gray-300 rounded-md p-2" readonly disabled>
+                                                    </div>
+                                                    <div class="flex flex-col gap-2">
+                                                        <label for="proof_payment" class="text-sm font-bold text-gray-500">Proof Payment</label>
+                                                        <input type="file" name="proof_payment" id="proof_payment" class="border border-gray-300 rounded-md p-2">
+                                                    </div>
+                                                    <div class="flex flex-col gap-2">
+                                                        <button type="submit" class="bg-primary/80 hover:bg-primary text-dark2 hover:text-dark3 py-3 w-full font-bold rounded-xl shadow-md transition-all duration-300">
+                                                            Proceed to Payment
+                                                        </button>
+                                                        <button data-modal-hide="static-modal-{{ $trainer->id }}" type="button" class="text-gray-500 hover:text-gray-800 font-bold transition-all duration-300">
+                                                            Cancel Order
+                                                        </button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ClassController;
 use Illuminate\Support\Facades\Route;
 use App\Events\UserRegistration;
 use Illuminate\Support\Facades\DB;
@@ -124,6 +125,16 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     Route::patch('/trainers', [App\Http\Controllers\PersonalTrainerController::class, 'updatePersonalTrainer'])->name('personaltrainer.update');
     Route::delete('/trainers', [App\Http\Controllers\PersonalTrainerController::class, 'deletePersonalTrainer'])->name('personaltrainer.delete');
 
+    //Route Payment
+    Route::post('/payment', [App\Http\Controllers\PaymentController::class, 'createPayment'])->name('payment.create');
+
+    //Route Membership
+    Route::post('/membership', [App\Http\Controllers\MembershipController::class, 'createMembership'])->name('membership.create');
+    Route::patch('/membership', [App\Http\Controllers\MembershipController::class, 'updateMembership'])->name('membership.update');
+    Route::delete('/membership', [App\Http\Controllers\MembershipController::class, 'deleteMembership'])->name('membership.delete');
+
+      
+
 });
 
 Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function () {
@@ -210,6 +221,10 @@ Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function 
 
         return view('dashboard.user.transaction', ['subscriptions' => $subscriptions]);
     })->name('user.transaction');
+
+    //Route Class
+    Route::post('/class', [App\Http\Controllers\ClassController::class, 'enrollClass'])->name('class.enroll'); 
+    
 });
 
 // profile
