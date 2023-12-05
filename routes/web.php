@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Events\UserRegistration;
+use Illuminate\Support\Facades\DB;
 require __DIR__.'/auth.php';
 
 /*
@@ -39,7 +40,6 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     Route::patch('/photo-user/{id}', [UserController::class, 'photoUpload'])->name('picture.update');
     Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
 
-    //cth route get dari controller
     Route::get('/userlist', [UserController::class, 'getUserList'])->name('admin.userlist');
 
     Route::view('/transaction', 'dashboard.admin.transaction')->name('admin.transaction');
@@ -48,6 +48,59 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     Route::view('/classes', 'dashboard.admin.classes')->name('admin.classes');
     Route::view('/instructors', 'dashboard.admin.instructors')->name('admin.instructors');
     Route::view('/broadcast', 'dashboard.admin.broadcast')->name('admin.broadcast');
+
+    //transaction, from subscriptions table, join users, payments, personal trainer join personal trainers, membership, join memberships, get data user->name, payment->amount, payment->method, payment->status, (if personal trainer not null, personal_trainer->name or if membership not null, membership->duration as product)
+    Route::get('/transaction', function () {
+        $subscriptions = DB::table('subscriptions')
+            ->join('users', 'subscriptions.user_id', '=', 'users.id')
+            ->join('payments', 'subscriptions.payment_id', '=', 'payments.id')
+            ->leftJoin('personal_trainers', 'subscriptions.personal_trainer_id', '=', 'personal_trainers.id')
+            ->leftJoin('memberships', 'subscriptions.membership_id', '=', 'memberships.id')
+            ->select(
+                'subscriptions.*',
+                'users.name as user_name',
+                'payments.total as payment_total',
+                'payments.method as payment_method',
+                'payments.status as payment_status',
+                DB::raw('CASE 
+                    WHEN subscriptions.personal_trainer_id IS NULL THEN memberships.duration
+                    ELSE personal_trainers.name 
+                    END AS product')
+            )
+            ->paginate(10);
+
+        return view('dashboard.admin.transaction', ['subscriptions' => $subscriptions]);
+    })->name('admin.transaction');
+
+    Route::get('/classes', function () {
+        $workoutClasses = DB::table('workout_classes')
+            ->join('instructors', 'workout_classes.instructor_id', '=', 'instructors.id')
+            ->select('workout_classes.*', 'instructors.name as instructor_name')
+            ->paginate(10);
+
+        return view('dashboard.admin.classes', ['classes' => $workoutClasses]);
+    })->name('admin.classes');
+
+    Route::get('/instructors', function () {
+        $instructors = DB::table('instructors')
+            ->leftJoin('instructor_expertise', 'instructors.id', '=', 'instructor_expertise.instructor_id')
+            ->leftJoin('expertises', 'instructor_expertise.expertise_id', '=', 'expertises.id')
+            ->leftJoin('workout_classes', 'instructors.id', '=', 'workout_classes.instructor_id')
+            ->select('instructors.*', 'expertises.name as expertise_name', 'workout_classes.name as class_name')
+            ->paginate(10);
+
+        return view('dashboard.admin.instructors', ['instructors' => $instructors]);
+    })->name('admin.instructors');
+
+    Route::get('/trainers', function () {
+        $trainers = DB::table('personal_trainers')
+            ->leftJoin('trainer_expertise', 'personal_trainers.id', '=', 'trainer_expertise.trainer_id')
+            ->leftJoin('expertises', 'trainer_expertise.expertise_id', '=', 'expertises.id')
+            ->select('personal_trainers.*', 'expertises.name as expertise_name')
+            ->paginate(10);
+
+        return view('dashboard.admin.trainers', ['trainers' => $trainers]);
+    })->name('admin.trainers');
 });
 
 Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function () {

@@ -11,14 +11,14 @@
                     <div class="block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5  ">
                         <div class="w-full mb-1">
                             <div class="mb-4">
-                                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl ">All Instructors</h1>
+                                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl ">All Instructor</h1>
                             </div>
                             <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 ">
                                 <div class="flex items-center mb-4 sm:mb-0">
                                     <form class="sm:pr-3" action="#" method="GET">
-                                        <label for="instructors-search" class="sr-only">Search</label>
+                                        <label for="instructor-search" class="sr-only">Search</label>
                                         <div class="relative w-48 mt-1 sm:w-64 xl:w-96">
-                                            <input type="text" name="email" id="instructors-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="Search for instructors">
+                                            <input type="text" name="email" id="instructor-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="Search for instructor">
                                         </div>
                                     </form>
                                     <div class="flex items-center w-full sm:justify-end">
@@ -38,7 +38,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button id="createInstructorButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5   focus:outline-none " type="button" data-drawer-target="drawer-create-instructor-default" data-drawer-show="drawer-create-instructor-default" aria-controls="drawer-create-instructor-default" data-drawer-placement="right">
+                                <button id="createClassButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5   focus:outline-none " type="button" data-drawer-target="drawer-create-class-default" data-drawer-show="drawer-create-class-default" aria-controls="drawer-create-class-default" data-drawer-placement="right">
                                     Add new instructor
                                 </button>
                             </div>
@@ -55,32 +55,24 @@
                                                     <div class="flex items-center">
                                                         <input id="checkbox-all" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300    ">
                                                         <label for="checkbox-all" class="sr-only">checkbox</label>
-                                                    </div>
+                                                     </div>
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                                     Instructor Name
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                                    Technology
+                                                    Expertise
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                                    Description
-                                                </th>
-                                                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                                    ID
-                                                </th>
-                                                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                                    Price
-                                                </th>
-                                                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                                    Discount
+                                                    Class 
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                                     Actions
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200  ">
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            @foreach($instructors as $instructor)
                                             <tr class="hover:bg-gray-100 ">
                                                 <td class="w-4 p-4">
                                                     <div class="flex items-center">
@@ -89,27 +81,22 @@
                                                         <label for="checkbox-1" class="sr-only">checkbox</label>
                                                     </div>
                                                 </td>
-                                                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap ">
-                                                    <div class="text-base font-semibold text-gray-900 ">nama</div>
-                                                    <div class="text-sm font-normal text-gray-500 ">kategori</div>
-                                                </td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">technology</td>
-                                                <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs ">description</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">id</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">price</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">discount</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">{{ $instructor->name }}</td>
+                                                <td class="p-4 max-w-md text-base font-medium text-gray-900 overflow-hidden whitespace-normal overflow-ellipsis">{{ $instructor->expertise_name}}</td>
+                                                <td class="p-4 max-w-md text-base font-medium text-gray-900 overflow-hidden whitespace-normal overflow-ellipsis">{{ $instructor->class_name}}</td>
 
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
-                                                    <button type="button" id="updateInstructorButton" data-drawer-target="drawer-update-instructor-default" data-drawer-show="drawer-update-instructor-default" aria-controls="drawer-update-instructor-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300   ">
+                                                    <button type="button" id="updateClassButton" data-drawer-target="drawer-update-class-default" data-drawer-show="drawer-update-class-default" aria-controls="drawer-update-class-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300   ">
                                                         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
                                                         Update
                                                     </button>
-                                                    <button type="button" id="deleteInstructorButton" data-drawer-target="drawer-delete-instructor-default" data-drawer-show="drawer-delete-instructor-default" aria-controls="drawer-delete-instructor-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 ">
+                                                    <button type="button" id="deleteClassButton" data-drawer-target="drawer-delete-class-default" data-drawer-show="drawer-delete-class-default" aria-controls="drawer-delete-class-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 ">
                                                         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                                                         Delete
                                                     </button>
                                                 </td>
-                                            </tr>                      
+                                            </tr>
+                                            @endforeach                      
                                         </tbody>
                                     </table>
                                 </div>
@@ -117,32 +104,16 @@
                         </div>
                     </div>
 
-                    <div class="sticky bottom-0 right-0 items-center w-full p-4 border-t border-gray-200 sm:flex sm:justify-between  ">
-                        <div class="flex items-center mb-4 sm:mb-0">
-                            <a href="#" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  ">
-                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            </a>
-                            <a href="#" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  ">
-                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            </a>
-                            <span class="text-sm font-normal text-gray-500 ">Showing <span class="font-semibold text-gray-900 ">1-20</span> of <span class="font-semibold text-gray-900 ">2290</span></span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <a href="#" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300   ">
-                                <svg class="w-5 h-5 mr-1 -ml-1"" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                Previous
-                            </a>
-                            <a href="#" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300   ">
-                                Next
-                                <svg class="w-5 h-5 ml-1 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            </a>
-                        </div>
-                    </div>
+                    @if(count($instructors)>0)
+                    <nav class="mx-auto w-full overflow-x-auto justify-between pt-4" aria-label="Table navigation">
+                        {{ $instructors->appends(['sort_by' => request('sort_by')])->appends(['query' => request ('query')])->links() }}
+                    </nav>
+                    @endif
 
-                    <!-- Edit Instructor Drawer -->
-                    <div id="drawer-update-instructor-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white " tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
-                        <h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase ">Update Instructor</h5>
-                        <button type="button" data-drawer-dismiss="drawer-update-instructor-default" aria-controls="drawer-update-instructor-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center  ">
+                    <!-- Edit Class Drawer -->
+                    <div id="drawer-update-class-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white " tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
+                        <h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase ">Update Class</h5>
+                        <button type="button" data-drawer-dismiss="drawer-update-class-default" aria-controls="drawer-update-class-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center  ">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             <span class="sr-only">Close menu</span>
                         </button>
@@ -150,7 +121,7 @@
                             <div class="space-y-4">
                                 <div>
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
-                                    <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5      " value="Education Dashboard" placeholder="Type instructor name" required="">
+                                    <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5      " value="Education Dashboard" placeholder="Type class name" required="">
                                 </div>
                                 <div>
                                     <label for="category" class="block mb-2 text-sm font-medium text-gray-900 ">Technology</label>
@@ -167,7 +138,7 @@
                                 </div>
                                 <div>
                                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
-                                    <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500      " placeholder="Enter event description here">Start developing with an open-source library of over 450+ UI components, sections, and pages built with the utility classes from Tailwind CSS and designed in Figma.</textarea>
+                                    <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500      " placeholder="Enter event description here">Start developing with an open-source library of over 450+ UI components, sections, and pages built with the utility instructors from Tailwind CSS and designed in Figma.</textarea>
                                 </div>
                                 <div>
                                     <label for="discount" class="block mb-2 text-sm font-medium text-gray-900 ">Discount</label>
@@ -194,27 +165,27 @@
                         </form>
                     </div>
 
-                    <!-- Delete Instructor Drawer -->
-                    <div id="drawer-delete-instructor-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white " tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
+                    <!-- Delete Class Drawer -->
+                    <div id="drawer-delete-class-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white " tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
                         <h5 id="drawer-label" class="inline-flex items-center text-sm font-semibold text-gray-500 uppercase ">Delete</h5>
-                        <button type="button" data-drawer-dismiss="drawer-delete-instructor-default" aria-controls="drawer-delete-instructor-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center  ">
+                        <button type="button" data-drawer-dismiss="drawer-delete-class-default" aria-controls="drawer-delete-class-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center  ">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             <span class="sr-only">Close menu</span>
                         </button>
                         <svg class="w-10 h-10 mt-8 mb-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <h3 class="mb-6 text-lg text-gray-500 ">Are you sure you want to delete this instructor?</h3>
+                        <h3 class="mb-6 text-lg text-gray-500 ">Are you sure you want to delete this class?</h3>
                         <a href="#" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2.5 text-center mr-2 ">
                             Yes, I'm sure
                         </a>
-                        <a href="#" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-sm px-3 py-2.5 text-center      " data-drawer-hide="drawer-delete-instructor-default">
+                        <a href="#" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-sm px-3 py-2.5 text-center      " data-drawer-hide="drawer-delete-class-default">
                             No, cancel
                         </a>
                     </div>
 
-                    <!-- Add Instructor Drawer -->
-                    <div id="drawer-create-instructor-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white " tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
-                        <h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase ">New Instructor</h5>
-                        <button type="button" data-drawer-dismiss="drawer-create-instructor-default" aria-controls="drawer-create-instructor-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center  ">
+                    <!-- Add Class Drawer -->
+                    <div id="drawer-create-class-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white " tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
+                        <h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase ">New Class</h5>
+                        <button type="button" data-drawer-dismiss="drawer-create-class-default" aria-controls="drawer-create-class-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center  ">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             <span class="sr-only">Close menu</span>
                         </button>
@@ -222,7 +193,7 @@
                             <div class="space-y-4">
                                 <div>
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
-                                    <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5      " placeholder="Type instructor name" required="">
+                                    <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5      " placeholder="Type class name" required="">
                                 </div>
 
                                 <div>
@@ -257,9 +228,9 @@
                                 </div>
                                 <div class="bottom-0 left-0 flex justify-center w-full pb-4 space-x-4 md:px-4 md:absolute">
                                     <button type="submit" class="text-white w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center   ">
-                                        Add instructor
+                                        Add class
                                     </button>
-                                    <button type="button" data-drawer-dismiss="drawer-create-instructor-default" aria-controls="drawer-create-instructor-default" class="inline-flex w-full justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10      ">
+                                    <button type="button" data-drawer-dismiss="drawer-create-class-default" aria-controls="drawer-create-class-default" class="inline-flex w-full justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10      ">
                                         <svg aria-hidden="true" class="w-5 h-5 -ml-1 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                         Cancel
                                     </button>

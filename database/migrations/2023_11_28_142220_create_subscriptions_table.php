@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('user_id');
             $table->uuid('payment_id');
-            $table->unsignedBigInteger('personal_trainer_id');
-            $table->unsignedBigInteger('membership_id');
+            $table->unsignedBigInteger('personal_trainer_id')->nullable();
+            $table->unsignedBigInteger('membership_id')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 

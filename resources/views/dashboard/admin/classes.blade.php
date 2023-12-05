@@ -55,32 +55,33 @@
                                                     <div class="flex items-center">
                                                         <input id="checkbox-all" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300    ">
                                                         <label for="checkbox-all" class="sr-only">checkbox</label>
-                                                    </div>
+                                                     </div>
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                                     Class Name
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                                    Technology
-                                                </th>
-                                                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                                     Description
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                                    ID
+                                                    Instructor Name
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                                    Price
+                                                    Day Time
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                                    Discount
+                                                    Duration
+                                                </th>
+                                                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
+                                                    Capacity
                                                 </th>
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                                     Actions
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200  ">
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            @foreach($classes as $class)
                                             <tr class="hover:bg-gray-100 ">
                                                 <td class="w-4 p-4">
                                                     <div class="flex items-center">
@@ -89,15 +90,15 @@
                                                         <label for="checkbox-1" class="sr-only">checkbox</label>
                                                     </div>
                                                 </td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">{{ $class->name }}</td>
+                                                <td class="p-4 max-w-md text-base font-medium text-gray-900 overflow-hidden whitespace-normal overflow-ellipsis">{{ $class->description }}</td>
+                                                <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs ">{{ $class->instructor_name }}</td>
                                                 <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap ">
-                                                    <div class="text-base font-semibold text-gray-900 ">nama</div>
-                                                    <div class="text-sm font-normal text-gray-500 ">kategori</div>
+                                                    <div class="text-base font-semibold text-gray-900 ">{{ $class->day }}</div>
+                                                    <div class="text-sm font-normal text-gray-500 ">{{ $class->time }}</div>
                                                 </td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">technology</td>
-                                                <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs ">description</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">id</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">price</td>
-                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">discount</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">{{ $class->duration }}</td>
+                                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">{{ $class->capacity }}</td>
 
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
                                                     <button type="button" id="updateClassButton" data-drawer-target="drawer-update-class-default" data-drawer-show="drawer-update-class-default" aria-controls="drawer-update-class-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300   ">
@@ -109,7 +110,8 @@
                                                         Delete
                                                     </button>
                                                 </td>
-                                            </tr>                      
+                                            </tr>
+                                            @endforeach                      
                                         </tbody>
                                     </table>
                                 </div>
@@ -117,27 +119,11 @@
                         </div>
                     </div>
 
-                    <div class="sticky bottom-0 right-0 items-center w-full p-4 border-t border-gray-200 sm:flex sm:justify-between  ">
-                        <div class="flex items-center mb-4 sm:mb-0">
-                            <a href="#" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  ">
-                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            </a>
-                            <a href="#" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100  ">
-                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            </a>
-                            <span class="text-sm font-normal text-gray-500 ">Showing <span class="font-semibold text-gray-900 ">1-20</span> of <span class="font-semibold text-gray-900 ">2290</span></span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <a href="#" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300   ">
-                                <svg class="w-5 h-5 mr-1 -ml-1"" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                Previous
-                            </a>
-                            <a href="#" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300   ">
-                                Next
-                                <svg class="w-5 h-5 ml-1 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                            </a>
-                        </div>
-                    </div>
+                    @if(count($classes)>0)
+                    <nav class="mx-auto w-full overflow-x-auto justify-between pt-4" aria-label="Table navigation">
+                        {{ $classes->appends(['sort_by' => request('sort_by')])->appends(['query' => request ('query')])->links() }}
+                    </nav>
+                    @endif
 
                     <!-- Edit Class Drawer -->
                     <div id="drawer-update-class-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white " tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
