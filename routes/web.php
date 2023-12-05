@@ -145,10 +145,10 @@ Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function 
         return view('dashboard.user.membership', ['memberships' => $memberships]);
     })->name('user.membership');
 
-    Route::get('/classes', function(){
-        $activeClasses = DB::table('user_workout_classes')
-            ->join('workout_classes', 'user_workout_classes.workout_class_id', '=', 'workout_classes.id')
-            ->where('user_workout_classes.user_id', '=', auth()->user()->id)
+    Route::get('/class', function(){
+        $activeClasses = DB::table('user_workout_class')
+            ->join('workout_classes', 'user_workout_class.workout_class_id', '=', 'workout_classes.id')
+            ->where('user_workout_class.user_id', '=', auth()->user()->id)
             ->select('workout_classes.*')
             ->get();
         
@@ -156,9 +156,47 @@ Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function 
             ->paginate(10);
 
         return view('dashboard.user.class', ['classes' => $classes, 'activeClasses' => $activeClasses]);
-    })->name('user.classes');
+    })->name('user.class');
 
 
+    //personal trainer
+    Route::get('/trainer', function () {
+        //check table subscriptions jika ada user_id = auth()->user()->id dan personal_trainer_id != null maka show personal trainer data, else show personal trainer list
+        $activeTrainers = DB::table('subscriptions')
+            ->join('personal_trainers', 'subscriptions.personal_trainer_id', '=', 'personal_trainers.id')
+            ->where('subscriptions.user_id', '=', auth()->user()->id) 
+            ->whereNotNull('subscriptions.personal_trainer_id')
+            ->select('personal_trainers.*')
+            ->get();
+        $trainers = DB::table('personal_trainers')
+            ->paginate(10);
+
+        return view('dashboard.user.trainer', ['trainers' => $trainers, 'activeTrainers' => $activeTrainers]);
+    })->name('user.trainer');
+
+        //transaction, from subscriptions table, join users, payments, personal trainer join personal trainers, membership, join memberships, get data user->name, payment->amount, payment->method, payment->status, (if personal trainer not null, personal_trainer->name or if membership not null, membership->duration as product)
+    Route::get('/transaction', function () {
+        $subscriptions = DB::table('subscriptions')
+            ->join('users', 'subscriptions.user_id', '=', 'users.id')
+            ->join('payments', 'subscriptions.payment_id', '=', 'payments.id')
+            ->leftJoin('personal_trainers', 'subscriptions.personal_trainer_id', '=', 'personal_trainers.id')
+            ->leftJoin('memberships', 'subscriptions.membership_id', '=', 'memberships.id')
+            ->where('subscriptions.user_id', '=', auth()->user()->id)
+            ->select(
+                'subscriptions.*',
+                'users.name as user_name',
+                'payments.total as payment_total',
+                'payments.method as payment_method',
+                'payments.status as payment_status',
+                DB::raw('CASE 
+                    WHEN subscriptions.personal_trainer_id IS NULL THEN memberships.duration
+                    ELSE personal_trainers.name 
+                    END AS product')
+            )
+            ->paginate(10);
+
+        return view('dashboard.user.transaction', ['subscriptions' => $subscriptions]);
+    })->name('user.transaction');
 });
 
 // profile

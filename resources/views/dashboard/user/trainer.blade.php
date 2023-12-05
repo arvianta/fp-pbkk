@@ -8,19 +8,23 @@
             <div class="p-4 my-6 w-10/12 float-right">
                 <div class="sm:px-6 mx-4"> 
                     <div class="px-4">  
+                        <!-- active trainers -->
                         <div class="mb-5 flex items-center justify-between">
-                            <h2 class="text-lg font-semibold text-gray-900">Active Trainers</h2>
+                            <h2 class="text-lg font-semibold text-gray-900 -ml-2">Active Trainers</h2>
                             </div>
+                            @if($activeTrainers->isEmpty())
+                                <p class="text-gray-500 h-24">None active trainers</p>
+                            @else
+                            @foreach($activeTrainers as $activeTrainer)
                             <div class="mb-6 sm:w-1/3 rounded-lg bg-white p-6 shadow-md">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                <img class="mr-2 h-10 w-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1566753323558-f4e0952af115?q=80&w=1921&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="profile" />
+                                <img class="mr-2 h-10 w-10 rounded-full object-cover" src="https://source.unsplash.com/random/900x700/?face/{{ $activeTrainer->id }}" alt="profile" />
                                 <div>
-                                    <h3 class="text-base font-semibold text-gray-900">Kotler Philips</h3>
-                                    <span class="block text-xs font-normal text-gray-500">Gymnastic Speciality  </span>
+                                    <h3 class="text-base font-semibold text-gray-900">{{ $activeTrainer->name }}</h3>
+                                    <span class="block text-xs font-normal text-gray-500">{{ $activeTrainer->certification }} </span>
                                 </div>
                                 </div>
-                                <span class="inline-block px-2 py-1 text-xs font-semibold text-gray-700 bg-primary rounded-full">active until 30 December 2023</span>
                             </div>
                             <div class="mt-6 flex items-center justify-between text-sm font-semibold text-gray-900">
                                 <div class="flex">
@@ -36,26 +40,29 @@
                                 4,7 (750 Reviews)
                                 </div>
                             </div>
+                            @endforeach
+                            @endif
                         </div>
 
+                        <!-- explore trainers -->
                         <div class="my-5 flex items-center justify-between">
                             <h2 class="text-lg font-semibold text-gray-900">Explore Personal Trainers</h2>
                         </div>
                             
                         <div class="grid grid-cols-1 3md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            @for($i = 1; $i <= 9; $i++)
-                            <div class="rounded-lg bg-white p-6 shadow-md">
+                            @foreach($trainers as $trainer)
+                            <button data-modal-target="static-modal" data-modal-index="{{ $trainer->id }}" data-modal-toggle="static-modal" class="rounded-lg bg-white p-6 shadow-md">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center">
-                                    <img class="mr-2 h-10 w-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1566753323558-f4e0952af115?q=80&w=1921&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="profile" />
+                                    <img class="mr-2 h-10 w-10 rounded-full object-cover" src="https://source.unsplash.com/random/900x700/?face/{{ $trainer->id }}" alt="profile" />
                                     <div>
-                                        <h3 class="text-base font-semibold text-gray-900">Kotler Philips</h3>
+                                    <h3 class="text-base font-semibold text-gray-900">{{ $trainer->name }}</h3>
                                         <span class="block text-xs font-normal text-gray-500">Gymnastic Speciality  </span>
                                     </div>
                                     </div>
-                                    <p class="text-sm font-medium text-indigo-500"><span class="mr-0.5">+</span>Follow</p>
+                                    <p class="text-sm font-medium text-indigo-500">Rp {{ $trainer->session_cost }}</p>
                                 </div>
-                                <p class="my-6 text-sm font-normal text-gray-500">Hi, I'm Jessica Jane. I am a doctoral student at Harvard University majoring in Web . . .</p>
+                                <p class="my-6 text-sm font-normal text-left text-gray-500">{{ $trainer->certification }} </span>
                                 <div class="mt-6 flex items-center justify-between text-sm font-semibold text-gray-900">
                                     <div class="flex">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-2 h-5 w-5 text-base text-gray-500">
@@ -70,8 +77,44 @@
                                     4,7 (750 Reviews)
                                     </div>
                                 </div>
+                            </button>
+                            <!-- Main modal -->
+                            <div id="static-modal-{{ $trainer->id }}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden fixed z-50 justify-center bg-gray-800/60 items-center md:inset-0 max-h-full">
+                                <div class="relative p-4 w-full max-h-full mt-28">
+                                    <!-- Modal content -->
+                                    <div class="flex justify-center">
+                                        <div class="bg-white rounded-2xl overflow-hidden shadow-md w-1/3">
+                                            <img src="{{ asset('img/banner.png') }}" alt="" class="h-24 w-full"/>
+                                            <div class="flex flex-col items-center justify-center gap-6 p-6 md:p-10">
+                                            <h1 class="text-md md:text-xl font-extrabold">Order Summary</h1>
+                                            <p class="text-center text-gray-400">
+                                                You can now listen to millions of songs, audiobooks, and podcasts on
+                                                any device anywhere you like!
+                                            </p>
+                                            <div class="flex items-center justify-between bg-gray-200 p-4 w-full rounded-xl">
+                                                <div class="flex items-center gap-5">
+                                                <img src="https://source.unsplash.com/random/50x50/?gym/2" alt="" class="rounded-full"/>
+                                                <div class="space-y-1 text-sm">
+                                                    <p class="font-bold">Annual Plan</p>
+                                                    <p class="text-gray-400">$59.99/year</p>
+                                                </div>
+                                                </div>
+                                                <a href="#" class="text-sm font-bold text-dark3 hover:text-dark3 hover:no-underline underline transition-all duration-300">
+                                                    Change
+                                                </a>
+                                            </div>
+                                            <button data-modal-hide="static-modal-{{ $trainer->id }}" type="button" class="bg-primary/80 hover:bg-primary text-dark2 hover:text-dark3 py-3 w-full font-bold rounded-xl shadow-md transition-all duration-300">
+                                                Proceed to Payment
+                                            </button>
+                                            <button data-modal-hide="static-modal-{{ $trainer->id }}" type="button" class="text-gray-500 hover:text-gray-800 font-bold transition-all duration-300">
+                                                Cancel Order
+                                            </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
                 </div>
