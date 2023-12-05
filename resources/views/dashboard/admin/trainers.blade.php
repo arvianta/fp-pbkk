@@ -66,16 +66,16 @@
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                                     Session Cost
                                                 </th>
-                                                <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
+                                                <!-- <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                                     Expertise
-                                                </th>
+                                                </th> -->
                                                 <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                                     Actions
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach($trainers as $trainer)
+                                            @foreach($personal_trainers as $trainer)
                                             <tr class="hover:bg-gray-100 ">
                                                 <td class="w-4 p-4">
                                                     <div class="flex items-center">
@@ -87,17 +87,20 @@
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">{{ $trainer->name }}</td>
                                                 <td class="p-4 max-w-md text-base font-medium text-gray-900 overflow-hidden whitespace-normal overflow-ellipsis">{{ $trainer->certification }}</td>
                                                 <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">{{ $trainer->session_cost }}</td>
-                                                <td class="p-4 max-w-md text-base font-medium text-gray-900 overflow-hidden whitespace-normal overflow-ellipsis">{{ $trainer->expertise_name}}</td>
+                                                <!-- <td class="p-4 max-w-md text-base font-medium text-gray-900 overflow-hidden whitespace-normal overflow-ellipsis">{{ $trainer->expertise_name}}</td> -->
 
                                                 <td class="p-4 space-x-2 whitespace-nowrap">
-                                                    <button type="button" id="updateClassButton" data-drawer-target="drawer-update-class-default" data-drawer-show="drawer-update-class-default" aria-controls="drawer-update-class-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300   ">
+                                                    <!-- <button type="button" id="updateClassButton" data-drawer-target="drawer-update-class-default" data-drawer-show="drawer-update-class-default" aria-controls="drawer-update-class-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300   ">
                                                         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
-                                                        Update
-                                                    </button>
-                                                    <button type="button" id="deleteClassButton" data-drawer-target="drawer-delete-class-default" data-drawer-show="drawer-delete-class-default" aria-controls="drawer-delete-class-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 ">
-                                                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                                                        Delete
-                                                    </button>
+                                                        Details
+                                                    </button> -->
+                                                    <a href="{{ route('personaltrainer.info', ['id' => $trainer->id]) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                                                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
+                                                            <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
+                                                        </svg>
+                                                        Details
+                                                    </a>
                                                 </td>
                                             </tr>
                                             @endforeach                      
@@ -108,9 +111,9 @@
                         </div>
                     </div>
 
-                    @if(count($trainers)>0)
+                    @if(count($personal_trainers)>0)
                     <nav class="mx-auto w-full overflow-x-auto justify-between pt-4" aria-label="Table navigation">
-                        {{ $trainers->appends(['sort_by' => request('sort_by')])->appends(['query' => request ('query')])->links() }}
+                        {{ $personal_trainers->appends(['sort_by' => request('sort_by')])->appends(['query' => request ('query')])->links() }}
                     </nav>
                     @endif
 

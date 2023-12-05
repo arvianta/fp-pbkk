@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Events\UserRegistration;
 use Illuminate\Support\Facades\DB;
@@ -43,8 +44,12 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
 
     Route::get('/userlist', [UserController::class, 'getUserList'])->name('admin.userlist');
 
+    //notfication
+    Route::get('/notification', [NotificationController::class, 'getNotification'])->name('get.notification');
+    Route::post('/notification', [NotificationController::class, 'createNotification'])->name('create.notification');
+
     Route::view('/transaction', 'dashboard.admin.transaction')->name('admin.transaction');
-    Route::view('/trainers', 'dashboard.admin.trainers')->name('admin.trainers');
+    // Route::view('/trainers', 'dashboard.admin.trainers')->name('admin.trainers');
     Route::view('/membership', 'dashboard.admin.membership')->name('admin.membership');
     Route::view('/classes', 'dashboard.admin.classes')->name('admin.classes');
     Route::view('/instructors', 'dashboard.admin.instructors')->name('admin.instructors');
@@ -100,17 +105,24 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
         return view('dashboard.admin.instructors', ['instructors' => $instructors]);
     })->name('admin.instructors');
 
-    Route::get('/trainers', function () {
-        $trainers = DB::table('personal_trainers')
-            ->leftJoin('trainer_expertise', 'personal_trainers.id', '=', 'trainer_expertise.trainer_id')
-            ->leftJoin('expertises', 'trainer_expertise.expertise_id', '=', 'expertises.id')
-            ->select('personal_trainers.*', 'expertises.name as expertise_name')
-            ->paginate(10);
+    // Route::get('/trainers', function () {
+    //     $trainers = DB::table('personal_trainers')
+    //         ->leftJoin('trainer_expertise', 'personal_trainers.id', '=', 'trainer_expertise.trainer_id')
+    //         ->leftJoin('expertises', 'trainer_expertise.expertise_id', '=', 'expertises.id')
+    //         ->select('personal_trainers.*', 'expertises.name as expertise_name')
+    //         ->paginate(10);
 
-        return view('dashboard.admin.trainers', ['trainers' => $trainers]);
-    })->name('admin.trainers');
+    //     return view('dashboard.admin.trainers', ['trainers' => $trainers]);
+    // })->name('admin.trainers');
 
     Route::get('/api/payment-data', [PaymentController::class, 'getPaymentData'])->name('api.payment-data'); 
+
+    //Route Trainers
+    Route::get('/trainers', [App\Http\Controllers\PersonalTrainerController::class, 'getAllPersonalTrainers'])->name('personaltrainer.list');
+    Route::get('/trainerinfo/{id}', [App\Http\Controllers\PersonalTrainerController::class, 'getPersonalTrainerById'])->name('personaltrainer.info');
+    Route::post('/trainers', [App\Http\Controllers\PersonalTrainerController::class, 'createPersonalTrainer'])->name('personaltrainer.create');
+    Route::patch('/trainers', [App\Http\Controllers\PersonalTrainerController::class, 'updatePersonalTrainer'])->name('personaltrainer.update');
+
 });
 
 Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function () {
