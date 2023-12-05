@@ -20,6 +20,14 @@ Route::get('/', function () {
     return view('dump.homepage');
 });
 
+Route::get('/redirectdashboard', function () {
+    if (auth()->user()->role_id == 1) {
+        return redirect()->route('dashboard.admin');
+    } else {
+        return redirect()->route('dashboard.user');
+    }
+});
+
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], function () {
     Route::get('/dashboard', function () {
         return view('dashboard.admin');

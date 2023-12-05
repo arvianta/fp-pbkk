@@ -26,7 +26,6 @@ class UserSeeder extends Seeder
                 'age' => 20,
                 'height' => 180,
                 'weight' => 78,
-                'profile_picture' => 'awdsadsawwds',
             ],
         ]);
 
@@ -41,7 +40,20 @@ class UserSeeder extends Seeder
                 'age' => 21,
                 'height' => 171,
                 'weight' => 57,
-                'profile_picture' => 'dfsdf',
+            ],
+        ]);
+
+        User::insert([
+            [
+                'id' => Uuid::uuid4()->toString(),
+                'name' => 'user',
+                'email' => 'user@gmail.com',
+                'phone_number' => '085156256504',
+                'role_id' => 2,
+                'password' => bcrypt('user1234'),
+                'age' => 21,
+                'height' => 171,
+                'weight' => 57,
             ],
         ]);
     }
