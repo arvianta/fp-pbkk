@@ -17,7 +17,6 @@ class PersonalTrainerController extends Controller
     public function createPersonalTrainer(Request $request)
     {
         $validatedData = $request->validate([
-            'id' => 'required|numeric',
             'name' => 'required|string|max:255',
             'certification' => 'required|string|max:255',
             'session_cost' => 'required|numeric',
@@ -28,7 +27,7 @@ class PersonalTrainerController extends Controller
 
         $result = $this->personalTrainerService->createPersonalTrainer($validatedData, $expertiseIds);
 
-        return view('dashboard.admin.trainers', $result);
+        return redirect()->back()->with($result);
     }
 
     public function updatePersonalTrainer(Request $request)

@@ -9,7 +9,7 @@ class ExpertiseSeeder extends Seeder
 {
     public function run()
     {
-        Expertise::factory()->count(10)->create();
+        Expertise::factory()->count(20)->create();
     }
 }
 

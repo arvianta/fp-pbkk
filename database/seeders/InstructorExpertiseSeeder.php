@@ -12,6 +12,6 @@ class InstructorExpertiseSeeder extends Seeder
      */
     public function run(): void
     {
-        InstructorExpertise::factory()->count(10)->create();
+        InstructorExpertise::factory()->count(50)->create();
     }
 }
