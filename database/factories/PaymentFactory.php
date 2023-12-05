@@ -14,6 +14,7 @@ class PaymentFactory extends Factory
 
     public function definition()
     {
+        $userIds = \App\Models\User::pluck('id')->toArray();
         return [
             'id' => $this->faker->uuid,
             'method' => $this->faker->randomElement(['Credit Card', 'PayPal', 'Bank Transfer']),
@@ -22,6 +23,7 @@ class PaymentFactory extends Factory
             'status' => $this->faker->randomElement(['Pending', 'Completed', 'Failed']),
             'created_at' => $this->faker->dateTimeThisYear(),
             'updated_at' => $this->faker->dateTimeThisYear(),
+            'user_id' => $this->faker->randomElement($userIds),
         ];
     }
 }
