@@ -122,6 +122,7 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     Route::get('/trainerinfo/{id}', [App\Http\Controllers\PersonalTrainerController::class, 'getPersonalTrainerById'])->name('personaltrainer.info');
     Route::post('/trainers', [App\Http\Controllers\PersonalTrainerController::class, 'createPersonalTrainer'])->name('personaltrainer.create');
     Route::patch('/trainers', [App\Http\Controllers\PersonalTrainerController::class, 'updatePersonalTrainer'])->name('personaltrainer.update');
+    Route::delete('/trainers', [App\Http\Controllers\PersonalTrainerController::class, 'deletePersonalTrainer'])->name('personaltrainer.delete');
 
 });
 

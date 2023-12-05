@@ -13,6 +13,6 @@ class TrainerExpertiseSeeder extends Seeder
      */
     public function run(): void
     {
-        TrainerExpertise::factory()->count(10)->create();
+        TrainerExpertise::factory()->count(50)->create();
     }
 }

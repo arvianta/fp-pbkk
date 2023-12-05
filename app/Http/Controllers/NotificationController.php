@@ -10,7 +10,6 @@ class NotificationController extends Controller
     //create notification
     public function createNotification(Request $request)
     {
-        dd($request->all());
         $validatedData = $request->validate([
             'message' => 'required',
         ]);

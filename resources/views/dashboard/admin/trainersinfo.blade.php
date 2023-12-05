@@ -29,11 +29,27 @@
                             <x-text-input id="certification" name="certification" type="text" class="mt-1 block w-full" :value="old('certification', $certification)" required autofocus autocomplete="certification" />
                             <x-input-error class="mt-2" :messages="$errors->get('certification')" />
                         </div>
+                        
+                        <div>
+                            <x-input-label for="" :value="__('Expertise')" />
+                            @foreach($expertise_names as $expertise)
+                                <span class="inline-block bg-green-500 text-white px-2 py-1 mr-2 mt-2 rounded">{{ $expertise }}</span>
+                            @endforeach
+                        </div>
+                    
                     </div>
 
                     <div class="flex items-center gap-4">
                         <x-primary-button>{{ __('Save') }}</x-primary-button>
+                        <div class="flex items-center gap-4">
+                            <form method="post" action="{{ route('personaltrainer.delete', ['id' => $id]) }}" class="mt-6 space-y-6">
+                                @csrf
+                                @method('delete')
+                                <x-danger-button>{{ __('Delete') }}</x-danger-button>
+                            </form>
+                        </div>
                     </div>
+
                 </form>
                 </div>
             </div>
