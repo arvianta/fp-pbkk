@@ -27,7 +27,7 @@ class PersonalTrainerController extends Controller
 
         $result = $this->personalTrainerService->createPersonalTrainer($validatedData, $expertiseIds);
 
-        return redirect()->back()->with($result);
+        return redirect()->back()->with('status', $result['message']);
     }
 
     public function updatePersonalTrainer(Request $request)
@@ -63,5 +63,16 @@ class PersonalTrainerController extends Controller
         $data = $this->personalTrainerService->getAllPersonalTrainers($request);
 
         return view('dashboard.admin.trainers', $data);
+    }
+
+    public function deletePersonalTrainer(Request $request)
+    {
+        $result = $this->personalTrainerService->deletePersonalTrainer($request->id);
+
+        if ($result['status'] === 'success') {
+            return redirect()->route('personaltrainer.list')->with('status', $result['message']);
+        } else {
+            return redirect()->route('personaltrainer.list')->with('error', $result['message']);
+        }
     }
 }

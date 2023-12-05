@@ -41,7 +41,15 @@
 
                     <div class="flex items-center gap-4">
                         <x-primary-button>{{ __('Save') }}</x-primary-button>
+                        <div class="flex items-center gap-4">
+                            <form method="post" action="{{ route('personaltrainer.delete', ['id' => $id]) }}" class="mt-6 space-y-6">
+                                @csrf
+                                @method('delete')
+                                <x-danger-button>{{ __('Delete') }}</x-danger-button>
+                            </form>
+                        </div>
                     </div>
+
                 </form>
                 </div>
             </div>
