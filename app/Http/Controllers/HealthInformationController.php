@@ -18,7 +18,8 @@ class HealthInformationController extends Controller
     {
         $validatedData = $request->validate([
             'user_id' => 'required',
-            'bmi' => 'required',
+            'height' => 'required',
+            'weight' => 'required',
             'body_fat_percentage' => 'required',
         ]);
         
@@ -40,7 +41,8 @@ class HealthInformationController extends Controller
     {
         $validatedData = $request->validate([
             'user_id' => 'required',
-            'bmi' => 'required',
+            'height' => 'required',
+            'weight' => 'required',
             'body_fat_percentage' => 'required',
         ]);
 

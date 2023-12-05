@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('health_informations', function (Blueprint $table) {
             $table->id();
+            $table->decimal('height', 6, 2)->nullable();
+            $table->decimal('weight', 6, 2)->nullable();
             $table->decimal('bmi', 6, 2)->nullable();
             $table->decimal('body_fat_percentage', 6, 2)->nullable();
             $table->timestamp('created_at')->useCurrent();

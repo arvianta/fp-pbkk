@@ -3,10 +3,18 @@
 namespace App\Http\Repository;
 
 use App\Models\HealthInformation;
+use App\Http\Utils\bmiCalculator;
 use Illuminate\Database\Eloquent\Builder;
 
 class HealthInformationRepository
 {
+    protected $bmiCalculator;
+
+    public function __construct(bmiCalculator $bmiCalculator)
+    {
+        $this->bmiCalculator = $bmiCalculator;
+    }
+    
     public function getQuery(): Builder
     {
         return HealthInformation::query();
@@ -15,9 +23,12 @@ class HealthInformationRepository
     public function createHealthInformation($request)
     {
         $healthInformation = new HealthInformation();
-        $healthInformation->user_id = $request->input('user_id');
-        $healthInformation->bmi = $request->input('bmi');
-        $healthInformation->body_fat_percentage = $request->input('body_fat_percentage');
+        $healthInformation->user_id = $request['user_id'];
+        $healthInformation->height = $request['height'];
+        $healthInformation->weight = $request['weight'];
+        $bmi = $this->bmiCalculator->calculateBMI($healthInformation->height, $healthInformation->weight);
+        $healthInformation->bmi = $bmi;
+        $healthInformation->body_fat_percentage = $request['body_fat_percentage'];
         $healthInformation->save();
         return $healthInformation;
     }
@@ -37,7 +48,10 @@ class HealthInformationRepository
     {
         $healthInformation = HealthInformation::where('user_id', $data['user_id'])->first();
         if ($healthInformation) {
-            $healthInformation->bmi = $data['bmi'];
+            $healthInformation->height = $data['height'];
+            $healthInformation->weight = $data['weight'];
+            $bmi = $this->bmiCalculator->calculateBMI($healthInformation->height, $healthInformation->weight);
+            $healthInformation->bmi = $bmi;
             $healthInformation->body_fat_percentage = $data['body_fat_percentage'];
             $healthInformation->save();
             return $healthInformation;

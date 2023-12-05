@@ -16,6 +16,8 @@ class HealthInformation extends Model
 
     protected $fillable = [
         'bmi',
+        'height',
+        'weight',
         'body_fat_percentage',
         'user_id',
     ];
