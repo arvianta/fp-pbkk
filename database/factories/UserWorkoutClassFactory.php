@@ -11,13 +11,11 @@ class UserWorkoutClassFactory extends Factory
 
     public function definition()
     {
+        $userIds = \App\Models\User::pluck('id')->toArray();
+        $workoutClassIds = \App\Models\WorkoutClass::pluck('id')->toArray();
         return [
-            'user_id' => function () {
-                return \App\Models\User::factory()->create()->id;
-            },
-            'workout_class_id' => function () {
-                return \App\Models\WorkoutClass::factory()->create()->id;
-            },
+            'user_id' => $this->faker->randomElement($userIds),
+            'workout_class_id' => $this->faker->randomElement($workoutClassIds),
         ];
     }
 }

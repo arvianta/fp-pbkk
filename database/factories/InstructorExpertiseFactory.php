@@ -11,13 +11,12 @@ class InstructorExpertiseFactory extends Factory
 
     public function definition()
     {
+        $instructorIds = \App\Models\Instructor::pluck('id')->toArray();
+        $expertiseIds = \App\Models\Expertise::pluck('id')->toArray();
+
         return [
-            'instructor_id' => function () {
-                return \App\Models\Instructor::factory()->create()->id;
-            },
-            'expertise_id' => function () {
-                return \App\Models\Expertise::factory()->create()->id;
-            },
+            'instructor_id' => $this->faker->randomElement($instructorIds),
+            'expertise_id' => $this->faker->randomElement($expertiseIds),
         ];
     }
 }

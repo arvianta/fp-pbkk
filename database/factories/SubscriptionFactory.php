@@ -11,25 +11,28 @@ class SubscriptionFactory extends Factory
 
     public function definition()
     {
+        $membershipIds = \App\Models\Membership::pluck('id')->toArray();
+        $personalTrainerIds = \App\Models\PersonalTrainer::pluck('id')->toArray();
+        $userIds = \App\Models\User::pluck('id')->toArray();
+        $paymentIds = \App\Models\Payment::pluck('id')->toArray();
+
         $randomField = $this->faker->randomElement(['personal_trainer_id', 'membership_id']);
         $personalTrainerId = null;
         $membershipId = null;
 
         if ($randomField === 'personal_trainer_id') {
-            $personalTrainerId = \App\Models\PersonalTrainer::factory()->create()->id;
+            $personalTrainerId = $this->faker->randomElement($personalTrainerIds);
         } else {
-            $membershipId = \App\Models\Membership::factory()->create()->id;
+            $membershipId = $this->faker->randomElement($membershipIds);
         }
 
         return [
-            'user_id' => function () {
-                return \App\Models\User::factory()->create()->id;
-            },
-            'payment_id' => function () {
-                return \App\Models\Payment::factory()->create()->id;
-            },
+            'user_id' => $this->faker->randomElement($userIds),
             'personal_trainer_id' => $personalTrainerId,
             'membership_id' => $membershipId,
+            'payment_id' => $this->faker->randomElement($paymentIds),
+            'created_at' => $this->faker->dateTimeThisYear(),
+            'updated_at' => $this->faker->dateTimeThisYear(),
         ];
     }
 }

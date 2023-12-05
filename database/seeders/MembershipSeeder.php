@@ -9,7 +9,15 @@ class MembershipSeeder extends Seeder
 {
     public function run()
     {
-        Membership::factory()->count(10)->create();
+        $memberships = [
+            ['duration' => '1', 'cost' => 175000],
+            ['duration' => '3', 'cost' => 425000],
+            ['duration' => '6', 'cost' => 800000],
+        ];
+
+        foreach ($memberships as $membership) {
+            Membership::create($membership);
+        }
     }
 }
 

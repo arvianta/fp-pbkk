@@ -11,13 +11,11 @@ class TrainerExpertiseFactory extends Factory
 
     public function definition()
     {
+        $trainerIds = \App\Models\PersonalTrainer::pluck('id')->toArray();
+        $expertiseIds = \App\Models\Expertise::pluck('id')->toArray();
         return [
-            'trainer_id' => function () {
-                return \App\Models\PersonalTrainer::factory()->create()->id;
-            },
-            'expertise_id' => function () {
-                return \App\Models\Expertise::factory()->create()->id;
-            },
+            'trainer_id' => $this->faker->randomElement($trainerIds),
+            'expertise_id' => $this->faker->randomElement($expertiseIds),
         ];
     }
 }

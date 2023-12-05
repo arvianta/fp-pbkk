@@ -49,6 +49,13 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     Route::view('/instructors', 'dashboard.admin.instructors')->name('admin.instructors');
     Route::view('/broadcast', 'dashboard.admin.broadcast')->name('admin.broadcast');
 
+    Route::get('/membership', function () {
+        $memberships = DB::table('memberships')
+            ->paginate(10);
+
+        return view('dashboard.admin.membership', ['memberships' => $memberships]);
+    })->name('admin.membership');
+
     //transaction, from subscriptions table, join users, payments, personal trainer join personal trainers, membership, join memberships, get data user->name, payment->amount, payment->method, payment->status, (if personal trainer not null, personal_trainer->name or if membership not null, membership->duration as product)
     Route::get('/transaction', function () {
         $subscriptions = DB::table('subscriptions')

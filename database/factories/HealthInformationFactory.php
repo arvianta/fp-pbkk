@@ -11,14 +11,13 @@ class HealthInformationFactory extends Factory
 
     public function definition()
     {
+        $userIds = \App\Models\User::pluck('id')->toArray();
         return [
             'bmi' => $this->faker->randomFloat(2, 15, 40),
             'body_fat_percentage' => $this->faker->randomFloat(2, 5, 35),
             'created_at' => $this->faker->dateTimeThisYear(),
             'updated_at' => $this->faker->dateTimeThisYear(),
-            'user_id' => function () {
-                return \App\Models\User::factory()->create()->id;
-            },
+            'user_id' => $this->faker->randomElement($userIds),
         ];
     }
 }

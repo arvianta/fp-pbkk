@@ -11,6 +11,7 @@ class WorkoutClassFactory extends Factory
 
     public function definition()
     {
+        $instructorIds = \App\Models\Instructor::pluck('id')->toArray();
         return [
             'name' => $this->faker->word,
             'description' => $this->faker->paragraph,
@@ -18,9 +19,7 @@ class WorkoutClassFactory extends Factory
             'time' => $this->faker->time,
             'duration' => $this->faker->time,
             'capacity' => $this->faker->numberBetween(5, 30),
-            'instructor_id' => function () {
-                return \App\Models\Instructor::factory()->create()->id;
-            },
+            'instructor_id' => $this->faker->randomElement($instructorIds),
         ];
     }
 }
