@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    protected $userService;
+    protected $userService, $userRepository;
 
     public function __construct(UserService $userService)
     {
@@ -71,7 +71,7 @@ class UserController extends Controller
         ]);
 
         if ($request->hasFile('profile_picture')) {
-            $picturePath = $request->file('profile_picture')->store('public/pictures');
+            $picturePath = $request->file('profile_picture')->store('public/pictures/' . $user->id . '/profile_picture');
             $user->profile_picture = str_replace('public/', '', $picturePath);
         }
 

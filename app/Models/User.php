@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(WorkoutClass::class, 'user_workout_class', 'user_id', 'workout_class_id');
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'user_id');
+    }
 }

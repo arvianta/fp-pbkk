@@ -20,10 +20,17 @@ class Payment extends Model
         'total',
         'date',
         'status',
+        'payment_photo',
+        'user_id',
     ];
 
     public function subscription()
     {
         return $this->hasOne(Subscriptions::class, 'payment_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
