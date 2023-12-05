@@ -17,8 +17,8 @@ class PersonalTrainerController extends Controller
     public function createPersonalTrainer(Request $request)
     {
         $validatedData = $request->validate([
+            'id' => 'required|numeric',
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:personal_trainers,email',
             'certification' => 'required|string|max:255',
             'session_cost' => 'required|numeric',
         ]);
@@ -28,14 +28,15 @@ class PersonalTrainerController extends Controller
 
         $result = $this->personalTrainerService->createPersonalTrainer($validatedData, $expertiseIds);
 
-        return view('dashboard.admin.personaltrainerlist', $result);
+        return view('dashboard.admin.trainers', $result);
     }
 
     public function updatePersonalTrainer(Request $request)
     {
+    
         $validatedData = $request->validate([
+            'id' => 'required|numeric',
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:personal_trainers,email',
             'certification' => 'required|string|max:255',
             'session_cost' => 'required|numeric',
         ]);
@@ -54,14 +55,14 @@ class PersonalTrainerController extends Controller
     public function getPersonalTrainerById(Request $request)
     {
         $data = $this->personalTrainerService->getPersonalTrainerById($request->id);
-
-        return view('dashboard.admin.personaltrainerinfo', $data);
+        
+        return view('dashboard.admin.trainersinfo', $data);
     }
 
     public function getAllPersonalTrainers(Request $request)
     {
         $data = $this->personalTrainerService->getAllPersonalTrainers($request);
 
-        return view('dashboard.admin.personaltrainerlist', $data);
+        return view('dashboard.admin.trainers', $data);
     }
 }
