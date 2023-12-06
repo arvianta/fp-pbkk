@@ -49,7 +49,9 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         $name = $request->name;
-        event(new UserRegistration($name));
+        $message = $name . ' has registered into Fithub';
+
+        event(new UserRegistration($message));
 
         Auth::login($user);
 

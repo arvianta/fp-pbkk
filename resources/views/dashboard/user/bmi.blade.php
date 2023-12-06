@@ -94,26 +94,65 @@
                             </div>
                         </div>
 
-                        <!-- Update -->
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="p-6 text-gray-900 font-semibold">
-                                {{ __("Update Data") }}
-                            </div>         
-                            <form class="max-w-sm mx-auto">
+                        <!-- Create => BMI -->
+                        @if($bmi == null)
+                        <form action="{{ route('bmi.create', Auth::user()->id) }}" method="POST" class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        @csrf
+                        @method('POST')
+                            <div class="text-gray-900 font-semibold text-lg pb-3">
+                                {{ __("Create Data") }}
+                            </div> 
                             <div class="mb-5">
                                 <label for="height" class="block mb-2 text-sm font-medium text-gray-900 ">Height</label>
-                                <input type="height" id="height" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="172" required>
+                                <input type="height" id="height" name="height" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="your height" required>
                             </div>
                             <div class="mb-5">
                                 <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 ">Weight</label>
-                                <input type="weight" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="65" required>
+                                <input type="weight" id="weight" name="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="your weight" required>
+                            </div>
+                            <div class="mb-5">
+                                <label for="body_fat_percentage" class="block mb-2 text-sm font-medium text-gray-900 ">Body Percentage</label>
+                                <input type="body_fat_percentage" id="body_fat_percentage" name="body_fat_percentage" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="your body percentage" required>
+                            </div>
+                            <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}"> 
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center   ">Submit</button>
+                        </form>
+                        @else
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            <div class="flex items-center justify-center">
+                                <h1 class="text-3xl font-bold text-gray-900 mt-8 mr-4">BMI Percentage</h1>
+                                <div class="text-center">
+                                <span class="inline-block px-3 py-1.5 bg-primary mt-8 text-dark3 text-lg font-semibold rounded-lg text-center items-center justify-center">
+                                        {{ number_format($bmi->bmi, 2) }}
+                                    </span>
+                                </div>
                             </div>
 
+
+                            <div class="p-6 text-gray-900 font-semibold">
+                                {{ __("Update Data") }}
+                            </div>         
+                            <form action="{{ route('bmi.update', Auth::user()->id) }}" method="POST" class="px-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            @csrf
+                            @method('PATCH')
+                            <div class="mb-5">
+                                <label for="height" class="block mb-2 text-sm font-medium text-gray-900 ">Height</label>
+                                <input type="height" id="height" name="height" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="172" required>
+                            </div>
+                            <div class="mb-5">
+                                <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 ">Weight</label>
+                                <input type="weight" id="weight" name="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="65" required>
+                            </div>
+                            <div class="mb-5">
+                                <label for="body_fat_percentage" class="block mb-2 text-sm font-medium text-gray-900 ">Body Percentage</label>
+                                <input type="body_fat_percentage" name="body_fat_percentage" id="body_fat_percentage" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      " placeholder="20" required>
+                            </div>
+                            <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}"> 
                             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center   ">Submit</button>
                             </form>
                         </div>
+                        @endif
                     </div>
-
                 </div>
             </div>
         </div>

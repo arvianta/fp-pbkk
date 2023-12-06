@@ -35,8 +35,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('user.bmi') }}" class="flex items-center p-2 {{ request()->routeIs('user.bmi') ? 'bg-primary text-dark3' : 'hover:bg-gray-200 hover:text-gray-900 group' }} text-gray-700 rounded-lg group">
-                <svg class="flex-shrink-0 w-5 h-5 transition duration-75 {{ request()->routeIs('user.bmi') ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-800' }}"" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 17 16">
+                <a href="{{ route('bmi.get', ['user_id' => Auth::user()->id]) }}" class="flex items-center p-2 {{ request()->routeIs('bmi.get') ? 'bg-primary text-dark3' : 'hover:bg-gray-200 hover:text-gray-900 group' }} text-gray-700 rounded-lg group">
+                <svg class="flex-shrink-0 w-5 h-5 transition duration-75 {{ request()->routeIs('bmi.get') ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-800' }}"" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 17 16">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 1v14m4.286-14v14M16 1H4.75a3.89 3.89 0 0 0-2.652 1.025A3.386 3.386 0 0 0 1 4.5c0 .928.395 1.819 1.098 2.475A3.89 3.89 0 0 0 4.75 8H8.5"/>
                 </svg>
                 <span class="flex-1 ml-3 whitespace-nowrap">BMI Calculator</span>

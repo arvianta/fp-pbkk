@@ -38,19 +38,20 @@
 
             var channel = pusher.subscribe('popup-channel');
             channel.bind('user-register', function(data) {
-                toastr.success('New user registered: ' + data.name, 'New User Registered');
-                //insert data into notification table
-                $.ajax({
-                    url: "{{ route('create.notification') }}",
-                    method: 'POST',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        message: data.name + " has registered to FitHub.",
-                    },
-                    success: function(data) {
-                        console.log(data);
-                    }
-                });
+                if(data.name != null){
+                    toastr.success(data.name);
+                    $.ajax({
+                        url: "{{ route('create.notification') }}",
+                        method: 'POST',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            message: data.name,
+                        },
+                        success: function(data) {
+                            console.log(data);
+                        }
+                    });
+                }
             });
         </script>
     </head>

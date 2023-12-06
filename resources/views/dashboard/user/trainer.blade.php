@@ -99,7 +99,7 @@
                                                 </div>
                                                 </div>
                                             </div>
-                                            <form method="post" action="{{ route('payment.create', ['user_id' => Auth::user()->id]) }}" enctype="multipart/form-data" class="flex flex-col gap-2">
+                                                <form method="post" action="{{ route('payment.create', ['user_id' => Auth::user()->id]) }}" enctype="multipart/form-data" class="flex flex-col gap-2">
                                                     @csrf
                                                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                     <div class="flex flex-col gap-2">

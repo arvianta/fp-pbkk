@@ -145,6 +145,11 @@ Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function 
     //Payment by user passing user_id
     Route::get('/payment/userlist/{id}', [App\Http\Controllers\PaymentController::class, 'getUserPayments'])->name('payment.userlist');
 
+    //bmi
+    Route::post('/bmi', [App\Http\Controllers\HealthInformationController::class, 'createHealthInformation'])->name('bmi.create');
+    Route::get('/bmi/{user_id}', [App\Http\Controllers\HealthInformationController::class, 'getHealthInformationbyUserId'])->name('bmi.get');
+    Route::patch('/bmi/{user_id}', [App\Http\Controllers\HealthInformationController::class, 'updateHealthInformationbyUserId'])->name('bmi.update');
+
     //bmi, chat, course, payment, transaction
     Route::view('/bmi', 'dashboard.user.bmi')->name('user.bmi');
     Route::view('/chat', 'dashboard.user.chat')->name('user.chat');

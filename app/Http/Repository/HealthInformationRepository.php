@@ -36,6 +36,9 @@ class HealthInformationRepository
     public function getHealthInformationbyUserId($userid)
     {
         $healthInformation = HealthInformation::where('user_id', $userid)->first();
+        if (!$healthInformation) {
+            return null;
+        }
         return $healthInformation;
     }
 

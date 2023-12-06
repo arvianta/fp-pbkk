@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Service\PaymentService;
+use App\Events\UserRegistration;
 use App\Models\Payment;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -34,6 +36,12 @@ class PaymentController extends Controller
         $picturePath = $request->file('payment_photo')->store('public/pictures/' . $paymentId);
         $payment->payment_photo = str_replace('public/', '', $picturePath);
 
+        
+        $name = DB::table('users')->where('id', $request->user_id)->value('name');
+        $notification = [
+            'message' =>  $name . ' has bought ' . $validatedData['product'],
+        ];
+        event(new UserRegistration($notification['message']));
 
         $payment->save();
         if ($paymentId) {

@@ -24,17 +24,13 @@ class HealthInformationController extends Controller
         ]);
         
         $healthInformation = $this->healthInformationService->createHealthInformation($validatedData);
-        return $healthInformation;
+        return view ('dashboard.user.bmi', ['bmi' => $healthInformation]);
     }
 
-    public function getHealthInformationbyUserId(Request $request)
+    public function getHealthInformationbyUserId(Request $request, $user_id)
     {
-        $validatedData = $request->validate([
-            'user_id' => 'required',
-        ]);
-
-        $healthInformation = $this->healthInformationService->getHealthInformationbyUserId($validatedData['user_id']);
-        return $healthInformation;
+        $healthInformation = $this->healthInformationService->getHealthInformationbyUserId($user_id);
+        return view('dashboard.user.bmi', ['bmi' => $healthInformation]);
     }
 
     public function updateHealthInformationbyUserId(Request $request)
@@ -47,6 +43,6 @@ class HealthInformationController extends Controller
         ]);
 
         $healthInformation = $this->healthInformationService->updateHealthInformationbyUserId($validatedData);
-        return $healthInformation;
+        return view('dashboard.user.bmi', ['bmi' => $healthInformation]);
     }
 }
