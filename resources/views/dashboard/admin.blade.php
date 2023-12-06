@@ -102,10 +102,10 @@
                                         <li class="py-3 sm:py-4">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center min-w-0">
-                                            <img class="flex-shrink-0 w-10 h-10" src="/images/products/iphone.png" alt="imac image">
+                                            <img class="flex-shrink-0 w-10 h-10 rounded-full" src="https://source.unsplash.com/random/500x500/?gym" alt="imac image">
                                             <div class="ml-3">
                                                 <p class="font-medium text-gray-900 truncate ">
-                                                iPhone 14 Pro 
+                                                Gym Workout
                                                 </p>
                                                 <div class="flex items-center justify-end flex-1 text-sm text-green-500 ">
                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -124,10 +124,10 @@
                                         <li class="py-3 sm:py-4">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center min-w-0">
-                                            <img class="flex-shrink-0 w-10 h-10" src="/images/products/imac.png" alt="imac image">
+                                            <img class="flex-shrink-0 w-10 h-10 rounded-full" src="https://source.unsplash.com/random/500x500/?gym/2" alt="imac image">
                                             <div class="ml-3">
                                                 <p class="font-medium text-gray-900 truncate ">
-                                                Apple iMac 27"
+                                                Cardio
                                                 </p>
                                                 <div class="flex items-center justify-end flex-1 text-sm text-green-500 ">
                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -146,10 +146,10 @@
                                         <li class="py-3 sm:py-4">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center min-w-0">
-                                            <img class="flex-shrink-0 w-10 h-10" src="/images/products/watch.png" alt="watch image">
+                                            <img class="flex-shrink-0 w-10 h-10 rounded-full" src="https://source.unsplash.com/random/500x500/?yoga" alt="watch image">
                                             <div class="ml-3">
                                                 <p class="font-medium text-gray-900 truncate ">
-                                                Apple Watch SE
+                                                Yoga
                                                 </p>
                                                 <div class="flex items-center justify-end flex-1 text-sm text-red-600 ">
                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -168,10 +168,10 @@
                                         <li class="py-3 sm:py-4">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center min-w-0">
-                                            <img class="flex-shrink-0 w-10 h-10" src="/images/products/ipad.png" alt="ipad image">
+                                            <img class="flex-shrink-0 w-10 h-10 rounded-full" src="https://source.unsplash.com/random/500x500/?gym/5" alt="ipad image">
                                             <div class="ml-3">
                                                 <p class="font-medium text-gray-900 truncate ">
-                                                Apple iPad Air
+                                                Bulking
                                                 </p>
                                                 <div class="flex items-center justify-end flex-1 text-sm text-green-500 ">
                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -190,10 +190,10 @@
                                         <li class="py-3 sm:py-4">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center min-w-0">
-                                            <img class="flex-shrink-0 w-10 h-10" src="/images/products/imac.png" alt="imac image">
+                                            <img class="flex-shrink-0 w-10 h-10 rounded-full" src="https://source.unsplash.com/random/500x500/?run" alt="imac image">
                                             <div class="ml-3">
                                                 <p class="font-medium text-gray-900 truncate ">
-                                                Apple iMac 24"
+                                                Jogging
                                                 </p>
                                                 <div class="flex items-center justify-end flex-1 text-sm text-red-600 ">
                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -223,7 +223,7 @@
                                                 Neil Sims
                                             </p>
                                             <p class="text-sm text-gray-500 truncate ">
-                                                email@flowbite.com
+                                                gym instructor
                                             </p>
                                             </div>
                                             <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
@@ -234,14 +234,14 @@
                                         <li class="py-3 sm:py-4">
                                         <div class="flex items-center space-x-4">
                                             <div class="flex-shrink-0">
-                                            <img class="w-8 h-8 rounded-full" src="/images/users/bonnie-green.png" alt="Neil image">
+                                            <img class="w-8 h-8 rounded-full" src="https://source.unsplash.com/random/500x500/?face" alt="Neil image">
                                             </div>
                                             <div class="flex-1 min-w-0">
                                             <p class="font-medium text-gray-900 truncate ">
                                                 Bonnie Green
                                             </p>
                                             <p class="text-sm text-gray-500 truncate ">
-                                                email@flowbite.com
+                                                gym instructor
                                             </p>
                                             </div>
                                             <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
@@ -252,14 +252,14 @@
                                         <li class="py-3 sm:py-4">
                                         <div class="flex items-center space-x-4">
                                             <div class="flex-shrink-0">
-                                            <img class="w-8 h-8 rounded-full" src="/images/users/michael-gough.png" alt="Neil image">
+                                            <img class="w-8 h-8 rounded-full" src="https://source.unsplash.com/random/500x500/?face/2" alt="Neil image">
                                             </div>
                                             <div class="flex-1 min-w-0">
                                             <p class="font-medium text-gray-900 truncate ">
                                                 Michael Gough
                                             </p>
                                             <p class="text-sm text-gray-500 truncate ">
-                                                email@flowbite.com
+                                                gym instructor
                                             </p>
                                             </div>
                                             <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
@@ -270,14 +270,14 @@
                                         <li class="py-3 sm:py-4">
                                         <div class="flex items-center space-x-4">
                                             <div class="flex-shrink-0">
-                                            <img class="w-8 h-8 rounded-full" src="/images/users/thomas-lean.png" alt="Neil image">
+                                            <img class="w-8 h-8 rounded-full" src="https://source.unsplash.com/random/500x500/?face/3" alt="Neil image">
                                             </div>
                                             <div class="flex-1 min-w-0">
                                             <p class="font-medium text-gray-900 truncate ">
                                                 Thomes Lean
                                             </p>
                                             <p class="text-sm text-gray-500 truncate ">
-                                                email@flowbite.com
+                                                gym instructor
                                             </p>
                                             </div>
                                             <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
@@ -288,14 +288,14 @@
                                         <li class="py-3 sm:py-4">
                                         <div class="flex items-center space-x-4">
                                             <div class="flex-shrink-0">
-                                            <img class="w-8 h-8 rounded-full" src="/images/users/lana-byrd.png" alt="Neil image">
+                                            <img class="w-8 h-8 rounded-full" src="https://source.unsplash.com/random/500x500/?face/4" alt="Neil image">
                                             </div>
                                             <div class="flex-1 min-w-0">
                                             <p class="font-medium text-gray-900 truncate ">
                                                 Lana Byrd
                                             </p>
                                             <p class="text-sm text-gray-500 truncate ">
-                                                email@flowbite.com
+                                                gym instructor
                                             </p>
                                             </div>
                                             <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
@@ -352,7 +352,7 @@
                             <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3 pb-6">
                                 <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex  sm:p-6 ">
                                     <div class="w-full">
-                                    <h3 class="text-base font-normal text-gray-500 ">New products</h3>
+                                    <h3 class="text-base font-normal text-gray-500 ">Membership</h3>
                                     <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl ">2,340</span>
                                     <p class="flex items-center text-sm font-normal text-gray-500 ">
                                         <span class="flex items-center mr-1.5 text-sm text-green-500 ">

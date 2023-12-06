@@ -27,3 +27,10 @@ modalHideButtons.forEach(button => {
         modal.classList.remove('opacity-100');
     });
 });
+
+document.getElementById('default-search').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault(); // Prevent the default form submission
+        document.getElementById('searchForm').submit(); // Submit the form
+    }
+});
