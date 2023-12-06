@@ -6,7 +6,7 @@ use App\Models\UserWorkoutClass;
 use App\Http\Service\WorkoutClassService;
 use Illuminate\Http\Request;
 
-class ClassController extends Controller
+class WorkoutClassController extends Controller
 {
     protected $workoutClassService;
     

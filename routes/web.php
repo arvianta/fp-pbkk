@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\ClassController;
+use App\Http\Controllers\WorkoutClassController;
 use Illuminate\Support\Facades\Route;
 use App\Events\UserRegistration;
 use Illuminate\Support\Facades\DB;
@@ -231,7 +231,7 @@ Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function 
     })->name('user.transaction');
 
     //Route Class
-    Route::post('/class', [App\Http\Controllers\ClassController::class, 'enrollClass'])->name('class.enroll'); 
+    Route::post('/class', [App\Http\Controllers\WorkoutClassController::class, 'enrollClass'])->name('class.enroll'); 
 
     //Route Payment
     Route::post('/trainer', [App\Http\Controllers\PaymentController::class, 'createPayment'])->name('payment.create');
