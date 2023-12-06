@@ -47,7 +47,7 @@ class PaymentController extends Controller
     {
         $payments = $this->paymentService->getUserPayments($request, $userId);
 
-        return view('user.payments', $payments);
+        return view('dashboard.user.transaction', $payments);
     }
 
     public function getAllPayments(Request $request)

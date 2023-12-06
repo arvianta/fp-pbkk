@@ -96,10 +96,7 @@
                                 <thead class="bg-gray-50 ">
                                 <tr>
                                     <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
-                                    User
-                                    </th>
-                                    <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
-                                    Subscription
+                                    Product
                                     </th>
                                     <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
                                     Amount
@@ -111,51 +108,55 @@
                                     Date Time
                                     </th>
                                     <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
+                                    Payment Photo
+                                    </th>
+                                    <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
                                     Status
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white ">
-                                @foreach($subscriptions as $subscription)
+                                @foreach($payments_list as $payment)
                                 <tr>
-                                    <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap ">
-                                    <span class="font-semibold">{{ $subscription->user_name }}</span>
-                                    </td>
-
-                                    @if(is_numeric($subscription->product))
+                                    @if(is_numeric($payment->product))
                                         <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap ">
                                             Membership 
-                                            <span class="bg-green-100 text-green-800 text-xs font-medium ml-2 px-2.5 py-0.5 rounded-md border border-green-100 ">{{ $subscription->product }} Month</span>
+                                            <span class="bg-green-100 text-green-800 text-xs font-medium ml-2 px-2.5 py-0.5 rounded-md border border-green-100 ">{{ $payment->product }} Month</span>
                                         </td>
                                     @else
                                         <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap ">
                                             Personal Trainer 
-                                            <span class="bg-green-100 text-green-800 text-xs font-medium ml-2 px-2.5 py-0.5 rounded-md border border-green-100 ">{{ $subscription->product }}</span>
+                                            <span class="bg-green-100 text-green-800 text-xs font-medium ml-2 px-2.5 py-0.5 rounded-md border border-green-100 ">{{ $payment->product }}</span>
                                         </td>
                                     @endif
-
-                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap ">
-                                    {{ $subscription->payment_total }}
+                                    <td class="p-4 text-sm text-gray-500 whitespace-nowrap ">
+                                        {{ $payment->total }}
                                     </td>
-                                    <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap ">
-                                    {{ $subscription->payment_method }}
+                                    <td class="p-4 text-sm text-gray-500 whitespace-nowrap ">
+                                        {{ $payment->method }}
                                     </td>
-                                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap ">
-                                    {{ $subscription->created_at }}
+                                    <td class="p-4 text-sm text-gray-500 whitespace-nowrap ">
+                                        {{ $payment->date }}
                                     </td>
-                                    <td class="p-4 whitespace-nowrap">
-
-                                    @if($subscription->payment_status == 'Completed')
+                                    <td class="p-4 text-sm text-gray-500 whitespace-nowrap ">
+                                        @if($payment->payment_photo)
+                                        <img src="{{ asset('storage/'.$payment->payment_photo) }}" class="w-24 h-24">
+                                        @else
+                                        <img src="{{ asset('img/default.png') }}" class="w-24 h-24">
+                                        @endif
+                                    </td>
+                                    <td>
+                                    @if($payment->status == 'Completed')
                                         <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-md border border-green-100 ">
-                                        {{ $subscription->payment_status }}
+                                        {{ $payment->status }}
                                         </span>
-                                    @elseif($subscription->payment_status == 'Failed')
+                                    @elseif($payment->status == 'Failed')
                                         <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-md border border-red-100 ">
-                                        {{ $subscription->payment_status }}
+                                        {{ $payment->status }}
                                         </span>
                                     @else
                                         <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-md border border-yellow-100 ">
-                                        {{ $subscription->payment_status }}
+                                        {{ $payment->status }}
                                         </span>
                                     @endif
                                     </td>
@@ -167,9 +168,9 @@
                         </div>
                         </div>
                     </div>
-                    @if(count($subscriptions)>0)
+                    @if(count($payments_list)>0)
                     <nav class="mx-auto w-full overflow-x-auto justify-between pt-4" aria-label="Table navigation">
-                        {{ $subscriptions->appends(['sort_by' => request('sort_by')])->appends(['query' => request ('query')])->links() }}
+                        {{ $payments_list->appends(['sort_by' => request('sort_by')])->appends(['query' => request ('query')])->links() }}
                     </nav>
                     @endif
                 </div>

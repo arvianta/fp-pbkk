@@ -161,6 +161,7 @@
                                             <input type="hidden" name="total" value="{{ $payment->total }}">
                                             <input type="hidden" name="date" value="{{ $payment->date }}">
                                             <input type="hidden" name="user_id" value="{{ $payment->user_id }}">
+                                            <input type="hidden" name="product" value="{{ $payment->product }}">
                                             <select name="status" onchange="this.form.submit()" class="block w-2/3 px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
                                                 <option value="Completed" {{ $payment->status === 'Completed' ? 'selected' : '' }}>Completed</option>
                                                 <option value="Failed" {{ $payment->status === 'Failed' ? 'selected' : '' }}>Failed</option>

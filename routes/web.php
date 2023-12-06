@@ -142,6 +142,9 @@ Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function 
         return view('dashboard.user');  
     })->name('dashboard.user');
 
+    //Payment by user passing user_id
+    Route::get('/payment/userlist/{id}', [App\Http\Controllers\PaymentController::class, 'getUserPayments'])->name('payment.userlist');
+
     //bmi, chat, course, payment, transaction
     Route::view('/bmi', 'dashboard.user.bmi')->name('user.bmi');
     Route::view('/chat', 'dashboard.user.chat')->name('user.chat');

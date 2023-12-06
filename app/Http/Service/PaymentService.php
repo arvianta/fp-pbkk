@@ -60,7 +60,7 @@ class PaymentService
 
         $data = [
             'title' => 'User Payments',
-            'payments' => $payments,
+            'payments_list' => $payments,
             'query' => $request->input('query'),
             'sort_by' => $request->input('sort_by'),
         ];
