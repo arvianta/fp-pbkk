@@ -44,8 +44,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('user.transaction') }}" class="flex items-center p-2 {{ request()->routeIs('user.transaction') ? 'bg-primary text-dark3' : 'hover:bg-gray-200 hover:text-gray-900 group' }} text-gray-700 rounded-lg group">
-                <svg class="flex-shrink-0 w-5 h-5 transition duration-75 {{ request()->routeIs('user.transaction') ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-800' }}"" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                <a href="{{ route('payment.userlist', ['id' => Auth::user()->id]) }}" class="flex items-center p-2 {{ request()->routeIs('payment.userlist') ? 'bg-primary text-dark3' : 'hover:bg-gray-200 hover:text-gray-900 group' }} text-gray-700 rounded-lg group">
+                <svg class="flex-shrink-0 w-5 h-5 transition duration-75 {{ request()->routeIs('payment.userlist') ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-800' }}"" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
                     <path d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM2 12V6h16v6H2Z"/>
                     <path d="M6 8H4a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2Zm8 0H9a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2Z"/>
                 </svg>
