@@ -68,6 +68,16 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('payment.list') }}" class="flex items-center p-2 {{ request()->routeIs('payment.list') ? 'bg-primary text-dark3' : 'hover:bg-gray-200 hover:text-gray-900 group' }} text-gray-700 rounded-lg group">
+                <svg class="flex-shrink-0 w-5 h-5 transition duration-75 {{ request()->routeIs('payment.list') ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-800' }}"" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                    <path d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM2 12V6h16v6H2Z"/>
+                    <path d="M6 8H4a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2Zm8 0H9a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2Z"/>
+                </svg>
+                <span class="flex-1 ml-3 whitespace-nowrap">Payment List</span>
+                <!-- <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full ">Pro</span> -->
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.broadcast') }}" class="flex items-center p-2 {{ request()->routeIs('admin.broadcast') ? 'bg-primary text-dark3' : 'hover:bg-gray-200 hover:text-gray-900 group' }} text-gray-700 rounded-lg group">
                 <svg class="flex-shrink-0 w-5 h-5 transition duration-75 {{ request()->routeIs('admin.broadcast') ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-800' }}"" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                     <path d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3.546l3.2 3.659a1 1 0 0 0 1.506 0L13.454 14H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-8 10H5a1 1 0 0 1 0-2h5a1 1 0 1 1 0 2Zm5-4H5a1 1 0 0 1 0-2h10a1 1 0 1 1 0 2Z"/>

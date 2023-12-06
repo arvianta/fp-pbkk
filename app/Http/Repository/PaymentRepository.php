@@ -18,6 +18,7 @@ class PaymentRepository
         $payment->method = $data['method'];
         $payment->total = $data['total'];
         $payment->date = $data['date'];
+        $payment->product = $data['product'];
         $payment->status = "Pending";
         $payment->user_id = $data['user_id'];
         $payment->save();
@@ -31,6 +32,7 @@ class PaymentRepository
         $payment->method = $data['method'];
         $payment->total = $data['total'];
         $payment->date = $data['date'];
+        $payment->product = $data['product'];
         $payment->status = $data['status'];
         $payment->user_id = $data['user_id'];
         $payment->save();

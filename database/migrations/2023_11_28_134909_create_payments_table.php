@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('total', 11, 2);
             $table->date('date');
             $table->string('status', 20);
+            $table->string('product');
             $table->string('payment_photo')->nullable();
             $table->uuid('user_id');
             $table->timestamp('created_at')->useCurrent();

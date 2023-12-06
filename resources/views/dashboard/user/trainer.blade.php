@@ -99,24 +99,32 @@
                                                 </div>
                                                 </div>
                                             </div>
-                                                <form  method="post" class="flex flex-col gap-4 w-full">
+                                            <form method="post" action="{{ route('payment.create', ['user_id' => Auth::user()->id]) }}" enctype="multipart/form-data" class="flex flex-col gap-2">
                                                     @csrf
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                     <div class="flex flex-col gap-2">
-                                                        <label for="payment_method" class="text-sm font-bold text-gray-500">Payment Method</label>
-                                                        <select name="payment_method" id="payment_method" class="border border-gray-300 rounded-md p-2">
-                                                            <option value="credit_card">Credit Card</option>
-                                                            <option value="bank_transfer">Bank Transfer</option>
-                                                            <option value="paypal">Paypal</option>
+                                                        <label for="method" class="text-sm font-bold text-gray-500">Payment Method</label>
+                                                        <select name="method" id="method" class="border border-gray-300 rounded-md p-2">
+                                                            <option value="Credit Card">Credit Card</option>
+                                                            <option value="Bank Transfer">Bank Transfer</option>
+                                                            <option value="Paypal">Paypal</option>
                                                         </select>
                                                     </div>
                                                     <div class="flex flex-col gap-2">
-                                                        <label for="total_price" class="text-sm font-bold text-gray-500">Total Price</label>
-                                                        <input type="text" name="total_price" id="total_price" value="{{ $trainer->session_cost }}" class="border border-gray-300 rounded-md p-2" readonly disabled>
+                                                        <label for="total" class="text-sm font-bold text-gray-500">Total Price</label>
+                                                        <input type="text" name="total" id="total" value="{{ $trainer->session_cost }}" class="border border-gray-300 rounded-md p-2" readonly disabled>
                                                     </div>
                                                     <div class="flex flex-col gap-2">
-                                                        <label for="proof_payment" class="text-sm font-bold text-gray-500">Proof Payment</label>
-                                                        <input type="file" name="proof_payment" id="proof_payment" class="border border-gray-300 rounded-md p-2">
+                                                        <label for="date" class="text-sm font-bold text-gray-500">Date</label>
+                                                        <input type="date" name="date" id="date" class="border border-gray-300 rounded-md p-2">
                                                     </div>
+                                                    <div class="flex flex-col gap-2">
+                                                        <label for="payment_photo" class="text-sm font-bold text-gray-500">Proof Payment</label>
+                                                        <input type="file" name="payment_photo" id="payment_photo" class="border border-gray-300 rounded-md p-2">
+                                                    </div>
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                    <input type="hidden" name="total" value="{{ $trainer->session_cost }}">
+                                                    <input type="hidden" name="product" value="{{ $trainer->name }}">
                                                     <div class="flex flex-col gap-2">
                                                         <button type="submit" class="bg-primary/80 hover:bg-primary text-dark2 hover:text-dark3 py-3 w-full font-bold rounded-xl shadow-md transition-all duration-300">
                                                             Proceed to Payment

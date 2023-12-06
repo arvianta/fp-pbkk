@@ -105,7 +105,7 @@ class PaymentService
 
         $data = [
             'title' => 'All Payments',
-            'payments' => $payments,
+            'payments_list' => $payments,
             'query' => $request->input('query'),
             'sort_by' => $request->input('sort_by'),
         ];

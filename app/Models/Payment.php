@@ -19,6 +19,7 @@ class Payment extends Model
         'method',
         'total',
         'date',
+        'product',
         'status',
         'payment_photo',
         'user_id',

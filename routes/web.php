@@ -126,15 +126,15 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin'], functio
     Route::delete('/trainers', [App\Http\Controllers\PersonalTrainerController::class, 'deletePersonalTrainer'])->name('personaltrainer.delete');
 
     //Route Payment
-    Route::post('/payment', [App\Http\Controllers\PaymentController::class, 'createPayment'])->name('payment.create');
+    Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'getAllPayments'])->name('payment.list');
+    Route::get('/paymentinfo/{id}', [App\Http\Controllers\PaymentController::class, 'getUserPayments'])->name('payment.info');
+    Route::patch('/payment', [App\Http\Controllers\PaymentController::class, 'updatePayment'])->name('payment.update');
+    
 
     //Route Membership
     Route::post('/membership', [App\Http\Controllers\MembershipController::class, 'createMembership'])->name('membership.create');
     Route::patch('/membership', [App\Http\Controllers\MembershipController::class, 'updateMembership'])->name('membership.update');
     Route::delete('/membership', [App\Http\Controllers\MembershipController::class, 'deleteMembership'])->name('membership.delete');
-
-      
-
 });
 
 Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function () {
@@ -146,7 +146,7 @@ Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function 
     Route::view('/bmi', 'dashboard.user.bmi')->name('user.bmi');
     Route::view('/chat', 'dashboard.user.chat')->name('user.chat');
     Route::view('/course', 'dashboard.user.course')->name('user.course');
-    Route::view('/payment', 'dashboard.user.payment')->name('user.payment');
+    // Route::view('/payment', 'dashboard.user.payment')->name('user.payment');
     Route::view('/transaction', 'dashboard.user.transaction')->name('user.transaction');
     Route::view('/membership', 'dashboard.user.membership')->name('user.membership');
     Route::view('/class', 'dashboard.user.class')->name('user.class');
@@ -224,7 +224,10 @@ Route::group(['middleware' => ['auth', 'isUser'], 'prefix' => 'user'], function 
 
     //Route Class
     Route::post('/class', [App\Http\Controllers\ClassController::class, 'enrollClass'])->name('class.enroll'); 
-    
+
+    //Route Payment
+    Route::post('/trainer', [App\Http\Controllers\PaymentController::class, 'createPayment'])->name('payment.create');
+
 });
 
 // profile

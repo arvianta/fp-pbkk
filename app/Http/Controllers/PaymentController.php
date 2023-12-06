@@ -21,6 +21,7 @@ class PaymentController extends Controller
             'method' => 'required|string|max:100',
             'total' => 'required|numeric',
             'date' => 'required|date',
+            'product' => 'required|string|max:100',
             'user_id' => 'required',
             'payment_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -34,6 +35,7 @@ class PaymentController extends Controller
         $payment->payment_photo = str_replace('public/', '', $picturePath);
 
 
+        $payment->save();
         if ($paymentId) {
             return redirect()->back()->with('status', 'Payment created successfully');
         } else {
@@ -45,14 +47,14 @@ class PaymentController extends Controller
     {
         $payments = $this->paymentService->getUserPayments($request, $userId);
 
-        return view('user.payments', compact('payments'));
+        return view('user.payments', $payments);
     }
 
     public function getAllPayments(Request $request)
     {
         $payment = $this->paymentService->getAllPayments($request);
 
-        return view('user.payment', compact('payment'));
+        return view('dashboard.admin.paymentlist', $payment);
     }
 
     public function updatePayment(Request $request)
@@ -61,11 +63,16 @@ class PaymentController extends Controller
             'id' => 'required',
             'method' => 'required|string|max:100',
             'total' => 'required|numeric',
+            'product' => 'required|string|max:100',
             'date' => 'required|date',
             'status' => 'required|string|max:100',
             'user_id' => 'required',
         ]);
 
+        //jika status dalam request adalah completed buat data di database subscription
+        if($validatedData['status'] == 'completed'){
+            
+        }
         $result = $this->paymentService->updatePayment($validatedData);
 
         return redirect()->back()->with($result);

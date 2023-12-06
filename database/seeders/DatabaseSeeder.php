@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
 
             HealthInformationSeeder::class,
-            PaymentSeeder::class,
             MembershipSeeder::class,
             PersonalTrainerSeeder::class,
             InstructorSeeder::class,
@@ -28,6 +27,7 @@ class DatabaseSeeder extends Seeder
 
             WorkoutClassSeeder::class,
             UserWorkoutClassSeeder::class,
+            PaymentSeeder::class,
             SubscriptionSeeder::class,
         ]);
     }

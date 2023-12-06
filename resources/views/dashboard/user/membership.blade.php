@@ -125,6 +125,7 @@
                                                         <label for="proof_payment" class="text-sm font-bold text-gray-500">Proof Payment</label>
                                                         <input type="file" name="proof_payment" id="proof_payment" class="border border-gray-300 rounded-md p-2">
                                                     </div>
+                                                    <input type="hidden" name="product" value="{{ $membership->duration }}">
                                                     <div class="flex flex-col gap-2">
                                                         <button type="submit" class="bg-primary/80 hover:bg-primary text-dark2 hover:text-dark3 py-3 w-full font-bold rounded-xl shadow-md transition-all duration-300">
                                                             Proceed to Payment
